@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="中科蓝讯--AB536X系列PWM的使用, Hexo">
+    <meta name="description" content="AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
 
     
 
-    <title>Hello World | Hexo</title>
+    <title>中科蓝讯--AB536X系列PWM的使用 | Hexo</title>
     <link rel="icon" type="image/png" href="/myblog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/myblog/libs/awesome/css/all.min.css">
@@ -246,12 +246,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/myblog/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/myblog/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">中科蓝讯--AB536X系列PWM的使用</h1>
                 </div>
             </div>
         </div>
@@ -365,12 +365,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/myblog/tags/PWM/">
+                                <span class="chip bg-color">PWM</span>
+                            </a>
+                        
+                            <a href="/myblog/tags/536X/">
+                                <span class="chip bg-color">536X</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                蓝讯开发
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -379,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-16
+                    2022-07-19
                 </div>
                 
 
@@ -400,19 +417,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <p>AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时输出。<br> AB536X 每组 timer定时器 对应 PWM IO 说明：<br>Timer3:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">G1: PWM0-&gt;PB0  PWM1-&gt;PB1  PWM2-&gt;PB2</span><br><span class="line">G2: PWM0-&gt;PB3  PWM1-&gt;PB4  PWM2-&gt;PB5</span><br><span class="line">G3: PWM0-&gt;PF2  PWM1-&gt;PA3  PWM2-&gt;PA4</span><br><span class="line">G4: PWM0-&gt;PE0</span><br></pre></td></tr></table></figure>
+<p>Timer4:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G1: PWM0-&gt;PE5  PWM1-&gt;PE6  PWM2-&gt;PE7</span><br><span class="line">G2:  		    PWM1-&gt;PF1  PWM2-&gt;PF1</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>Timer5:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G1: PWM0-&gt;PA5  PWM1-&gt;PA6  PWM2-&gt;PA7</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>FUNCMCON2 对应 PWM 的映射：<br>timer3-&gt;8Bit    timer4-&gt;12Bit  timer5-&gt;16Bit<br>G1-&gt;1 G2-&gt;2 ……..<br>例如：<br>Timer3 的 G1 组：<br>FUNCMCON2 &#x3D; (1&lt;&lt;8);<br>Timer3 的 G3 组：<br>FUNCMCON2 &#x3D; (3&lt;&lt;8);<br>Timer4 的 G1 组：<br>FUNCMCON2 &#x3D; (1&lt;&lt;12);</p>
+<p>备注：<br>查询 AB536X 每组 timer 对应 PWM IO需要查阅芯片datasheet，以上数据查找自《AB5362B DataSheet》<br>查找FUNCMCON2 寄存器功能《AB536X UserManual》<br>使用出现问题请复查以上提及的文档。</p>
+<p>SDK 默认定时器用途：<br>timer0 : 系统时钟使用<br>timer1: (可选) ledseg_ajust. 7 脚屏的时候使用  timer1_irq_init<br>timer3: (可选) 软件红外解码使用 </p>
+<p><strong>但6x系列芯片的定时器没有被占用，可以放心使用</strong></p>
+<p>例程：下面以 timer4 为例<br>初始化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#define PWM_MAX                     4001    </span><br><span class="line">void pwm_init(void)</span><br><span class="line">&#123;</span><br><span class="line">    //PWM2-T4-G1 PE7</span><br><span class="line">    //PWM1-T4-G1 PE6</span><br><span class="line">    //PWM0-T4-G1 PE5</span><br><span class="line"></span><br><span class="line">    GPIOEDIR &amp;= ~(BIT(7)|BIT(6)|BIT(5)) ; //DIR OUT</span><br><span class="line">	GPIOEDE |= (BIT(7)|BIT(6)|BIT(5)) ; //数字 IO 口要设置上.</span><br><span class="line">	GPIOEFEN |= (BIT(7)|BIT(6)|BIT(5)); //function io enable</span><br><span class="line"></span><br><span class="line">	FUNCMCON2 = (1 &lt;&lt; 12); // TIMER4的G1   pwm map to G1 (PE5/6/7)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8Bit</span><br><span class="line">	TMR4CON = 0x00; //时钟源默认为系统时钟 24M</span><br><span class="line">	TMR4CNT = 0;</span><br><span class="line">	TMR4PR = PWM_MAX + 1; //例如为 24M 时, 频率为 24M/(12000*4) = 500HZ, 即周期为0.002S. //U32</span><br><span class="line">	TMR4DUTY0 = 0 ; //u16 //25% 负占空比 PE1 //注意 PR &gt;= DUTY //DUTY ==PR, 全高. -1 (也就是 0xFFFF)时, 全低, 其他值表示&quot;负占空比&quot;</span><br><span class="line">	TMR4DUTY1 = 0;  //u16 //50% 负占空比 PB3</span><br><span class="line">    TMR4DUTY2 = 0;  //</span><br><span class="line"></span><br><span class="line">	TMR4CON |=(BIT(9) | BIT(10) | BIT(11)); //timer4 pwm0, pwm1, pwm2 enable</span><br><span class="line">	TMR4CON |= BIT(0); //Timer enable (defualt work in counter mode)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>扫描：<br>呼吸灯扫描放5ms中断，用作频谱灯需要放1ms中断，例程是简单的呼吸灯效果。主要是调整占空比 duty &#x3D; TMR4DUTY0 &#x2F;TMR4PR ;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">AT(.com_text.rgb)</span><br><span class="line">void rgb_breath_scan(void)&#123; // 5ms  放5ms中断</span><br><span class="line">    static u16 cnt = 0;</span><br><span class="line">    static u8 dir = 0;</span><br><span class="line"></span><br><span class="line">    if(dir==0)&#123;</span><br><span class="line">        if(cnt&lt;PWM_MAX)&#123;</span><br><span class="line">            cnt+=7;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            dir =1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if(dir==1)&#123;</span><br><span class="line">          if(cnt&gt;7)&#123;</span><br><span class="line">            cnt-=7;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            dir =0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	TMR4DUTY0 = cnt ; </span><br><span class="line">	TMR4DUTY1 = cnt; </span><br><span class="line">     TMR4DUTY2 = cnt; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
                 
             </div>
@@ -439,7 +461,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://nameiscn.github.io/myblog/myblog/2022/07/16/hello-world/">https://nameiscn.github.io/myblog/myblog/2022/07/16/hello-world/</a>
+                    <a href="https://nameiscn.github.io/myblog/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">https://nameiscn.github.io/myblog/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -476,7 +498,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/myblog/tags/PWM/">
+                                    <span class="chip bg-color">PWM</span>
+                                </a>
+                            
+                                <a href="/myblog/tags/536X/">
+                                    <span class="chip bg-color">536X</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -652,13 +682,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/">
+                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/myblog/medias/featureimages/14.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列TWS的接口调用">
+                        <img src="/myblog/medias/featureimages/7.jpg" class="responsive-img" alt="中科蓝讯AB5325A音箱回连慢解决方法">
                         
-                        <span class="card-title">中科蓝讯--AB532X系列TWS的接口调用</span>
+                        <span class="card-title">中科蓝讯AB5325A音箱回连慢解决方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -686,12 +716,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/myblog/tags/TWS/">
-                        <span class="chip bg-color">TWS</span>
+                    <a href="/myblog/tags/%E5%9B%9E%E8%BF%9E/">
+                        <span class="chip bg-color">回连</span>
                     </a>
                     
-                    <a href="/myblog/tags/532X/">
-                        <span class="chip bg-color">532X</span>
+                    <a href="/myblog/tags/532x/">
+                        <span class="chip bg-color">532x</span>
                     </a>
                     
                 </div>
@@ -702,16 +732,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/myblog/2022/07/16/hello-world/">
+                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/myblog/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/myblog/medias/featureimages/10.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列PWM的使用">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">中科蓝讯--AB532X系列PWM的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -722,17 +752,32 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            JSmcu
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    蓝讯开发
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/myblog/tags/532X/">
+                        <span class="chip bg-color">532X</span>
+                    </a>
+                    
+                    <a href="/myblog/tags/PWM/">
+                        <span class="chip bg-color">PWM</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

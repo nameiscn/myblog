@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式, Hexo">
+    <meta name="description" content="Hexo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
 
     
 
-    <title>Hello World | Hexo</title>
+    <title>中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式 | Hexo</title>
     <link rel="icon" type="image/png" href="/myblog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/myblog/libs/awesome/css/all.min.css">
@@ -246,12 +246,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/myblog/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/myblog/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</h1>
                 </div>
             </div>
         </div>
@@ -365,12 +365,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/myblog/">
+                                <span class="chip bg-color"></span>
+                            </a>
+                        
+                            <a href="/myblog/">
+                                <span class="chip bg-color"></span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/myblog/" class="post-category">
+                                
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -379,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-16
+                    2022-07-19
                 </div>
                 
 
@@ -400,19 +417,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <p>56A进入CBT模式：<br>&amp;emsp;&amp;emsp;配置工具默认是这样的：<br><img src="https://img-blog.csdnimg.cn/20191018002251728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>&amp;emsp;&amp;emsp;配置工具只支持5击进入CBT模式。客户需求是3击，进入CBT模式后蓝灯500ms周期闪烁下面是实现过程。</p>
+<p>&amp;emsp;&amp;emsp;在消息处理msg_bt.c中添加三击处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">case KTH_PLAY_PWR_USER_DEF:    ///三击进CBT测试模式</span><br><span class="line">//        printf(&quot;KTH_PLAY_PWR_USER_DEF\n&quot;);</span><br><span class="line">        //led_set_sta(0x00,0xaa,10,0);</span><br><span class="line">        led_on();</span><br><span class="line">        if (!bt_nor_is_connected()) &#123;</span><br><span class="line">            printf(&quot;FUNC_BT_CBT\n&quot;);</span><br><span class="line">            if(xcfg_cb.bb_cbt_test_en == 0)</span><br><span class="line">            &#123;</span><br><span class="line">                xcfg_cb.bb_cbt_test_en = 1;</span><br><span class="line">                led_set_sta(0x00, 0xaa, 5, 0);          </span><br><span class="line">                //蓝灯500ms周期闪烁，</span><br><span class="line">                bt_cfg.cbt_test_mode = xcfg_cb.bb_cbt_test_en;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>&amp;emsp;&amp;emsp;led_set_sta函数使用方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void led_set_sta(u8 rled_sta, u8 bled_sta, u8 uint, u8 period);</span><br><span class="line">led_set_sta(0x00, 0xaa, 5, 0); </span><br></pre></td></tr></table></figure>
+<p>&amp;emsp;rled_sta红灯的状态，对应配置工具的红灯点<br>&amp;emsp;bled_sta蓝灯的状态，对应配置工具的蓝灯点</p>
+<p><img src="https://img-blog.csdnimg.cn/20191018002546230.png" alt="在这里插入图片描述"></p>
+<p>&amp;emsp;uint表示一个单位时间&#x3D;uint*50ms<br>&amp;emsp;period表示闪灯周期</p>
+<p>&amp;emsp;led_set_sta(0x00, 0xaa, 5, 0);<br>&amp;emsp;相当于<br><img src="https://img-blog.csdnimg.cn/20191018002613556.png" alt="在这里插入图片描述"></p>
 
                 
             </div>
@@ -439,7 +454,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://nameiscn.github.io/myblog/myblog/2022/07/16/hello-world/">https://nameiscn.github.io/myblog/myblog/2022/07/16/hello-world/</a>
+                    <a href="https://nameiscn.github.io/myblog/myblog/note/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F.html">https://nameiscn.github.io/myblog/myblog/note/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -476,7 +491,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/myblog/">
+                                    <span class="chip bg-color"></span>
+                                </a>
+                            
+                                <a href="/myblog/">
+                                    <span class="chip bg-color"></span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -648,17 +671,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/">
+                <a href="/myblog/note/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F.html">
                     <div class="card-image">
                         
                         
-                        <img src="/myblog/medias/featureimages/14.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列TWS的接口调用">
+                        <img src="/myblog/medias/featureimages/3.jpg" class="responsive-img" alt="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式">
                         
-                        <span class="card-title">中科蓝讯--AB532X系列TWS的接口调用</span>
+                        <span class="card-title">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -668,30 +692,31 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
+                            <a href="/myblog/" class="post-category">
+                                    
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/myblog/tags/TWS/">
-                        <span class="chip bg-color">TWS</span>
+                    <a href="/myblog/">
+                        <span class="chip bg-color"></span>
                     </a>
                     
-                    <a href="/myblog/tags/532X/">
-                        <span class="chip bg-color">532X</span>
+                    <a href="/myblog/">
+                        <span class="chip bg-color"></span>
                     </a>
                     
                 </div>
@@ -705,13 +730,13 @@
                 本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/myblog/2022/07/16/hello-world/">
+                <a href="/myblog/note/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F.html">
                     <div class="card-image">
                         
                         
-                        <img src="/myblog/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/myblog/medias/featureimages/3.jpg" class="responsive-img" alt="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -722,17 +747,33 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            JSmcu
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/myblog/" class="post-category">
+                                    
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/myblog/">
+                        <span class="chip bg-color"></span>
+                    </a>
+                    
+                    <a href="/myblog/">
+                        <span class="chip bg-color"></span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

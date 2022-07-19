@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="中科蓝汛--AB5335系列蓝牙信号超出距离的处理, Hexo">
+    <meta name="description" content="1.超出距离的消息处理会执行到下面这个函数的消息处理
+1void bt_emit_notice(uint evt, u32 param)
+
+
+1234case BT_NOTICE_LOSTCONNECT:        connect_lo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +23,7 @@
 
     
 
-    <title>Hello World | Hexo</title>
+    <title>中科蓝汛--AB5335系列蓝牙信号超出距离的处理 | Hexo</title>
     <link rel="icon" type="image/png" href="/myblog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/myblog/libs/awesome/css/all.min.css">
@@ -246,12 +250,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/myblog/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/myblog/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">中科蓝汛--AB5335系列蓝牙信号超出距离的处理</h1>
                 </div>
             </div>
         </div>
@@ -365,12 +369,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/myblog/tags/AB5335/">
+                                <span class="chip bg-color">AB5335</span>
+                            </a>
+                        
+                            <a href="/myblog/tags/%E8%93%9D%E7%89%99%E8%B7%9D%E7%A6%BB/">
+                                <span class="chip bg-color">蓝牙距离</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                蓝讯开发
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -379,7 +400,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-16
+                    2022-07-19
                 </div>
                 
 
@@ -400,19 +421,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <p>1.超出距离的消息处理<br>会执行到下面这个函数的消息处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void bt_emit_notice(uint evt, u32 param)</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case BT_NOTICE_LOSTCONNECT:</span><br><span class="line">        connect_lost_flag = 1;</span><br><span class="line">        piano_res_play(T_WARNING_NEXT_TRACK, 3);    //“滴”一声</span><br><span class="line">        break;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>2.超出距离重新连接<br>会执行void func_bt_disp_status(void)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">switch (f_bt.disp_status) &#123;</span><br><span class="line">      ......</span><br><span class="line">        case BT_STA_CONNECTED:</span><br><span class="line">           connect_lost_flag = 0;</span><br><span class="line">           led_bt_connected();</span><br><span class="line">           break;</span><br><span class="line">       ......</span><br></pre></td></tr></table></figure>
+<p>3.在定时器处理蓝牙超出距离的灯闪<br>usr_tmr5ms_isr</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">if ((cnt_5ms % 20) == 0)&#123;</span><br><span class="line"></span><br><span class="line">       if( connt_lost_flag)&#123;</span><br><span class="line">           count_bt_lost++;</span><br><span class="line">           count_bt_lost_led++;</span><br><span class="line">           if(count_bt_lost ==100)&#123;//10S timer process</span><br><span class="line">           msg_enqueue(EVT_BT_LOSTCONNECT);</span><br><span class="line">           count_bt_lost= 0;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       if(count_bt_lost_led == 5)&#123;</span><br><span class="line">           led_on();</span><br><span class="line">           rled_off();</span><br><span class="line">       &#125;else if(count_bt_lost_led == 10)&#123;</span><br><span class="line">           led_off();</span><br><span class="line">           rled_off();</span><br><span class="line">           count_bt_lost_led=0;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>4.超出距离提示音</p>
+<p>提示音最好放到消息处理中播放</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">msg_bt.c</span><br><span class="line"></span><br><span class="line">case EVT_BT_LOSTCONNECT:</span><br><span class="line">      piano_res_play(T_WARNING_NEXT_TRACK, 3);    //“滴”一声</span><br><span class="line">      break;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>5.超出距离后重新连接</p>
+<p>void bt_emit_notice(uint evt, u32 param)函数需要做一下处理，否则会一直嘀嘀响</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">case BT_NOTICE_CONNECTED://连接上清除标志位</span><br><span class="line">       connt_lost_flag = 0;</span><br></pre></td></tr></table></figure>
+
 
                 
             </div>
@@ -439,7 +465,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://nameiscn.github.io/myblog/myblog/2022/07/16/hello-world/">https://nameiscn.github.io/myblog/myblog/2022/07/16/hello-world/</a>
+                    <a href="https://nameiscn.github.io/myblog/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/">https://nameiscn.github.io/myblog/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -476,7 +502,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/myblog/tags/AB5335/">
+                                    <span class="chip bg-color">AB5335</span>
+                                </a>
+                            
+                                <a href="/myblog/tags/%E8%93%9D%E7%89%99%E8%B7%9D%E7%A6%BB/">
+                                    <span class="chip bg-color">蓝牙距离</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -648,17 +682,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/">
+                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/myblog/medias/featureimages/14.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列TWS的接口调用">
+                        <img src="/myblog/medias/featureimages/10.jpg" class="responsive-img" alt="中科蓝汛--AB5335系列蓝牙信号超出距离的处理">
                         
-                        <span class="card-title">中科蓝讯--AB532X系列TWS的接口调用</span>
+                        <span class="card-title">中科蓝汛--AB5335系列蓝牙信号超出距离的处理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -668,9 +703,63 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    蓝讯开发
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/myblog/tags/AB5335/">
+                        <span class="chip bg-color">AB5335</span>
+                    </a>
+                    
+                    <a href="/myblog/tags/%E8%93%9D%E7%89%99%E8%B7%9D%E7%A6%BB/">
+                        <span class="chip bg-color">蓝牙距离</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/myblog/medias/featureimages/15.jpg" class="responsive-img" alt="中科蓝讯系列蓝牙IC编译工具安装">
+                        
+                        <span class="card-title">中科蓝讯系列蓝牙IC编译工具安装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -686,53 +775,15 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/myblog/tags/TWS/">
-                        <span class="chip bg-color">TWS</span>
+                    <a href="/myblog/tags/codeblocks/">
+                        <span class="chip bg-color">codeblocks</span>
                     </a>
                     
-                    <a href="/myblog/tags/532X/">
-                        <span class="chip bg-color">532X</span>
+                    <a href="/myblog/tags/RV32-Toolchain-Setup/">
+                        <span class="chip bg-color">RV32-Toolchain-Setup</span>
                     </a>
                     
                 </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/myblog/2022/07/16/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/myblog/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-16
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            JSmcu
-                            
-                        </span>
-                    </div>
-                </div>
-
                 
             </div>
         </div>
