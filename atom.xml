@@ -6,7 +6,7 @@
   <link href="https://nameiscn.github.io/myblog/atom.xml" rel="self"/>
   
   <link href="https://nameiscn.github.io/myblog/"/>
-  <updated>2022-07-20T15:28:21.499Z</updated>
+  <updated>2022-07-20T15:33:07.134Z</updated>
   <id>https://nameiscn.github.io/myblog/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>中科蓝讯--AB532X系列PWM的使用</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/20/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/20/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2022-07-20T15:25:22.088Z</published>
-    <updated>2022-07-20T15:28:21.499Z</updated>
+    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2022-07-18T16:24:37.000Z</published>
+    <updated>2022-07-20T15:33:07.134Z</updated>
     
     <content type="html"><![CDATA[<pre class="language-none"><code class="language-none">实例：PB3实现呼吸灯</code></pre><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>在pwm_port_init函数下</p><pre class="language-none"><code class="language-none">GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUTGPIOBDE |&#x3D; BIT(3); &#x2F;&#x2F;数字 IO 口要设置上.GPIOBFEN |&#x3D; BIT(3); &#x2F;&#x2F;function io enableFUNCMCON2 &#x3D; (2 &lt;&lt; 8); &#x2F;&#x2F; TIMER3的G2   pwm map to G1 (PE1&#x2F;2&#x2F;3)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8BitTMR3CON &#x3D; 0x00; &#x2F;&#x2F;时钟源默认为系统时钟 24MTMR3CNT &#x3D; 0;TMR3PR &#x3D; 1000; &#x2F;&#x2F;例如为 24M 时, 频率为 24M&#x2F;(12000*4) &#x3D; 500HZ, 即周期为0.002S. &#x2F;&#x2F;U32&#x2F;&#x2F;TMR3DUTY0 &#x3D; 12000 - 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;25% 负占空比 PE1 &#x2F;&#x2F;注意 PR &gt;&#x3D; DUTY &#x2F;&#x2F;DUTY &#x3D;&#x3D;PR, 全高. -1 (也就是 0xFFFF)时, 全低, 其他值表示&quot;负占空比&quot;TMR3DUTY1 &#x3D; 1000-1; &#x2F;&#x2F;u16 &#x2F;&#x2F;50% 负占空比 PB2&#x2F;&#x2F;TMR3DUTY2 &#x3D; 12000*3- 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;75% 负占空比 PE3TMR3CON |&#x3D; BIT(10); &#x2F;&#x2F;timer5 pwm0, pwm1, pwm2 enableTMR3CON |&#x3D; BIT(0); &#x2F;&#x2F;Timer enable (defualt work in counter mode)</code></pre><p>注意：<br>如果是在port_pwm.c下写的初始化函数。<br>打开这个宏，不然程序不会执行</p><pre class="language-none"><code class="language-none">#define TIMER_PWM_EN                    1           &#x2F;&#x2F;TIMER的PWM区别于LPWM</code></pre><p>在bsp_sys_init函数下调用初始化函数</p><pre class="language-none"><code class="language-none">#if PWM_RGB_EN    pwm_init();#endif &#x2F;&#x2F; PWM_RGB_EN    pwm_port_init();    &#x2F;&#x2F;&#x2F; enable user timer for display &amp; dac    sys_set_tmr_enable(1, 1);</code></pre><h4 id="编写扫描函数"><a href="#编写扫描函数" class="headerlink" title="编写扫描函数"></a>编写扫描函数</h4><pre class="language-none"><code class="language-none">AT(.com_text.rgb)void rgb_breath_scan(void)      &#x2F;&#x2F; 5ms  放5ms中断&#123;    static u8 cnt &#x3D; 0;    static u8 dir &#x3D; 0;    static u16 cduty &#x3D; 0;    cnt++;    if(cnt&gt;&#x3D;20)&#123;        if(dir&#x3D;&#x3D;0)&#123;        if(cduty&lt;999)&#123;            cduty &#x3D; cduty + 9;        &#125;else&#123;            dir &#x3D; 1;            cduty &#x3D; 999;        &#125;        &#125;else&#123;            if(cduty&gt;9)            &#123;                 cduty &#x3D; cduty - 9;            &#125;else&#123;                dir &#x3D; 0;                cduty &#x3D; 0;            &#125;        &#125;        cnt &#x3D; 0;    &#125;        TMR3DUTY1 &#x3D; cduty;&#125;</code></pre><h3 id="调用扫描函数"><a href="#调用扫描函数" class="headerlink" title="调用扫描函数"></a>调用扫描函数</h3><p>在usr_tmr5ms_isr下调用，增加的标志位为真代表播放状态，否则是暂停状态</p><pre class="language-none"><code class="language-none">if(RGB_LED_flag)&#123;        rgb_breath_scan();   &#125;else&#123;    TMR3DUTY1&#x3D;999;   &#125;</code></pre>]]></content>
     
