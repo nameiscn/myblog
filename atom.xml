@@ -6,7 +6,7 @@
   <link href="https://nameiscn.github.io/myblog/atom.xml" rel="self"/>
   
   <link href="https://nameiscn.github.io/myblog/"/>
-  <updated>2022-07-18T16:18:52.790Z</updated>
+  <updated>2022-07-20T15:25:07.174Z</updated>
   <id>https://nameiscn.github.io/myblog/</id>
   
   <author>
@@ -17,286 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>中科蓝汛--AB5335系列蓝牙信号超出距离的处理</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/</id>
-    <published>2022-07-18T16:20:37.708Z</published>
-    <updated>2022-07-18T16:18:52.790Z</updated>
+    <title></title>
+    <link href="https://nameiscn.github.io/myblog/2022/07/20/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://nameiscn.github.io/myblog/2022/07/20/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2022-07-20T15:25:22.088Z</published>
+    <updated>2022-07-20T15:25:07.174Z</updated>
     
-    <content type="html"><![CDATA[<p>1.超出距离的消息处理<br>会执行到下面这个函数的消息处理</p><pre class="language-none"><code class="language-none">void bt_emit_notice(uint evt, u32 param)</code></pre><pre class="language-none"><code class="language-none">case BT_NOTICE_LOSTCONNECT:        connect_lost_flag &#x3D; 1;        piano_res_play(T_WARNING_NEXT_TRACK, 3);    &#x2F;&#x2F;“滴”一声        break;</code></pre><p>2.超出距离重新连接<br>会执行void func_bt_disp_status(void)</p><pre class="language-none"><code class="language-none">switch (f_bt.disp_status) &#123;      ......        case BT_STA_CONNECTED:           connect_lost_flag &#x3D; 0;           led_bt_connected();           break;       ......</code></pre><p>3.在定时器处理蓝牙超出距离的灯闪<br>usr_tmr5ms_isr</p><pre class="language-none"><code class="language-none">if ((cnt_5ms % 20) &#x3D;&#x3D; 0)&#123;       if( connt_lost_flag)&#123;           count_bt_lost++;           count_bt_lost_led++;           if(count_bt_lost &#x3D;&#x3D;100)&#123;&#x2F;&#x2F;10S timer process           msg_enqueue(EVT_BT_LOSTCONNECT);           count_bt_lost&#x3D; 0;           &#125;       &#125;       if(count_bt_lost_led &#x3D;&#x3D; 5)&#123;           led_on();           rled_off();       &#125;else if(count_bt_lost_led &#x3D;&#x3D; 10)&#123;           led_off();           rled_off();           count_bt_lost_led&#x3D;0;       &#125;   &#125;</code></pre><p>4.超出距离提示音</p><p>提示音最好放到消息处理中播放</p><pre class="language-none"><code class="language-none">msg_bt.ccase EVT_BT_LOSTCONNECT:      piano_res_play(T_WARNING_NEXT_TRACK, 3);    &#x2F;&#x2F;“滴”一声      break;</code></pre><p>5.超出距离后重新连接</p><p>void bt_emit_notice(uint evt, u32 param)函数需要做一下处理，否则会一直嘀嘀响</p><pre class="language-none"><code class="language-none">case BT_NOTICE_CONNECTED:&#x2F;&#x2F;连接上清除标志位       connt_lost_flag &#x3D; 0;</code></pre>]]></content>
+    <content type="html"><![CDATA[<pre class="language-none"><code class="language-none">title: 中科蓝讯--AB532X系列PWM的使用date: 2022年7月19日00:24:37toc: true #是否显示文章目录tags: - PWM  - 532Xcategories: 蓝讯开发</code></pre><pre class="language-none"><code class="language-none">实例：PB3实现呼吸灯</code></pre><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>在pwm_port_init函数下</p><pre class="language-none"><code class="language-none">GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUTGPIOBDE |&#x3D; BIT(3); &#x2F;&#x2F;数字 IO 口要设置上.GPIOBFEN |&#x3D; BIT(3); &#x2F;&#x2F;function io enableFUNCMCON2 &#x3D; (2 &lt;&lt; 8); &#x2F;&#x2F; TIMER3的G2   pwm map to G1 (PE1&#x2F;2&#x2F;3)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8BitTMR3CON &#x3D; 0x00; &#x2F;&#x2F;时钟源默认为系统时钟 24MTMR3CNT &#x3D; 0;TMR3PR &#x3D; 1000; &#x2F;&#x2F;例如为 24M 时, 频率为 24M&#x2F;(12000*4) &#x3D; 500HZ, 即周期为0.002S. &#x2F;&#x2F;U32&#x2F;&#x2F;TMR3DUTY0 &#x3D; 12000 - 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;25% 负占空比 PE1 &#x2F;&#x2F;注意 PR &gt;&#x3D; DUTY &#x2F;&#x2F;DUTY &#x3D;&#x3D;PR, 全高. -1 (也就是 0xFFFF)时, 全低, 其他值表示&quot;负占空比&quot;TMR3DUTY1 &#x3D; 1000-1; &#x2F;&#x2F;u16 &#x2F;&#x2F;50% 负占空比 PB2&#x2F;&#x2F;TMR3DUTY2 &#x3D; 12000*3- 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;75% 负占空比 PE3TMR3CON |&#x3D; BIT(10); &#x2F;&#x2F;timer5 pwm0, pwm1, pwm2 enableTMR3CON |&#x3D; BIT(0); &#x2F;&#x2F;Timer enable (defualt work in counter mode)</code></pre><p>注意：<br>如果是在port_pwm.c下写的初始化函数。<br>打开这个宏，不然程序不会执行</p><pre class="language-none"><code class="language-none">#define TIMER_PWM_EN                    1           &#x2F;&#x2F;TIMER的PWM区别于LPWM</code></pre><p>在bsp_sys_init函数下调用初始化函数</p><pre class="language-none"><code class="language-none">#if PWM_RGB_EN    pwm_init();#endif &#x2F;&#x2F; PWM_RGB_EN    pwm_port_init();    &#x2F;&#x2F;&#x2F; enable user timer for display &amp; dac    sys_set_tmr_enable(1, 1);</code></pre><h4 id="编写扫描函数"><a href="#编写扫描函数" class="headerlink" title="编写扫描函数"></a>编写扫描函数</h4><pre class="language-none"><code class="language-none">AT(.com_text.rgb)void rgb_breath_scan(void)      &#x2F;&#x2F; 5ms  放5ms中断&#123;    static u8 cnt &#x3D; 0;    static u8 dir &#x3D; 0;    static u16 cduty &#x3D; 0;    cnt++;    if(cnt&gt;&#x3D;20)&#123;        if(dir&#x3D;&#x3D;0)&#123;        if(cduty&lt;999)&#123;            cduty &#x3D; cduty + 9;        &#125;else&#123;            dir &#x3D; 1;            cduty &#x3D; 999;        &#125;        &#125;else&#123;            if(cduty&gt;9)            &#123;                 cduty &#x3D; cduty - 9;            &#125;else&#123;                dir &#x3D; 0;                cduty &#x3D; 0;            &#125;        &#125;        cnt &#x3D; 0;    &#125;        TMR3DUTY1 &#x3D; cduty;&#125;</code></pre><h3 id="调用扫描函数"><a href="#调用扫描函数" class="headerlink" title="调用扫描函数"></a>调用扫描函数</h3><p>在usr_tmr5ms_isr下调用，增加的标志位为真代表播放状态，否则是暂停状态</p><pre class="language-none"><code class="language-none">if(RGB_LED_flag)&#123;        rgb_breath_scan();   &#125;else&#123;    TMR3DUTY1&#x3D;999;   &#125;</code></pre>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;1.超出距离的消息处理&lt;br&gt;会执行到下面这个函数的消息处理&lt;/p&gt;
-&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;void bt_emit_notice(uint evt, u32 param)&lt;/code&gt;</summary>
+    <summary type="html">&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;title: 中科蓝讯--AB532X系列PWM的使用
+date: 2022年7月19日00:24:37
+toc: true #是否显示文章目录
+tags:
+ - PWM</summary>
       
     
     
     
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="AB5335" scheme="https://nameiscn.github.io/myblog/tags/AB5335/"/>
-    
-    <category term="蓝牙距离" scheme="https://nameiscn.github.io/myblog/tags/%E8%93%9D%E7%89%99%E8%B7%9D%E7%A6%BB/"/>
     
   </entry>
   
   <entry>
-    <title>中科蓝讯系列蓝牙IC编译工具安装</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/</id>
-    <published>2022-07-18T16:20:37.705Z</published>
-    <updated>2022-07-18T16:18:25.573Z</updated>
+    <title>Anaconda相关命令</title>
+    <link href="https://nameiscn.github.io/myblog/2022/01/13/test/"/>
+    <id>https://nameiscn.github.io/myblog/2022/01/13/test/</id>
+    <published>2022-01-13T08:21:23.000Z</published>
+    <updated>2022-07-20T15:17:47.642Z</updated>
     
-    <content type="html"><![CDATA[<p>1.2.1安装codeblocks<br>文件夹01-tools\02-compile\编译环境下找到codeblocks-17.12-setup.exe<br>双击即可安装。<br>或下载文末资源找到codeblocks-17.12-setup.exe<br><img src="https://img-blog.csdnimg.cn/20191213001124301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Next</p><p><img src="https://img-blog.csdnimg.cn/20191213001144439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>I Agree</p><p><img src="https://img-blog.csdnimg.cn/20191213001154771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>默认选项-next</p><p><img src="https://img-blog.csdnimg.cn/20191213001210364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>默认选项 – Install</p><p><img src="https://img-blog.csdnimg.cn/20191213001224901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>安装中<br><img src="https://img-blog.csdnimg.cn/20191213001237455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h5 id="安装后选完成"><a href="#安装后选完成" class="headerlink" title="安装后选完成"></a>安装后选完成</h5><p>到这就完成了编译工具的安装，先别打开编译工具，想要编译程序还需要安装编译链。</p><p>1.2.2安装编译链</p><p>01-tools\02-compile\编译环境\RV32-Toolchain-Setup_v0.8.0</p><p>&amp;emsp;&amp;emsp;双击安装<br><img src="https://img-blog.csdnimg.cn/20191213001315319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>&amp;emsp;&amp;emsp;默认选项–下一步<br><img src="https://img-blog.csdnimg.cn/20191213001432418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;安装中，安装完成后选finish。</p><p>1.2.3使用编译工具<br>&amp;emsp;&amp;emsp;打开安装好的code block，把SDK_AB537X_S103_20191031\app\projects\earphone路径下的app.cbp文件拉进去。</p><p><img src="https://img-blog.csdnimg.cn/2019121300152489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>&amp;emsp;&amp;emsp;编译<br><img src="https://img-blog.csdnimg.cn/20191213001532601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;编译成功<br><img src="https://img-blog.csdnimg.cn/20191213001549254.png" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;至此，已经可以正式编译烧写代码了。</p>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;p&gt;1.2.1	安装codeblocks&lt;br&gt;文件夹01-tools\02-compile\编译环境下找到codeblocks-17.12-setup.exe&lt;br&gt;双击即可安装。&lt;br&gt;或下载文末资源找到codeblocks-17.12-setup.exe&lt;br&gt;&lt;img </summary>
-      
     
+    <category term="Python" scheme="https://nameiscn.github.io/myblog/categories/Python/"/>
     
     
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
+    <category term="Python" scheme="https://nameiscn.github.io/myblog/tags/Python/"/>
     
+    <category term="Windows" scheme="https://nameiscn.github.io/myblog/tags/Windows/"/>
     
-    <category term="codeblocks" scheme="https://nameiscn.github.io/myblog/tags/codeblocks/"/>
-    
-    <category term="RV32-Toolchain-Setup" scheme="https://nameiscn.github.io/myblog/tags/RV32-Toolchain-Setup/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯系列IC下载工具安装及介绍</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/</id>
-    <published>2022-07-18T16:20:37.701Z</published>
-    <updated>2022-07-18T16:17:16.742Z</updated>
-    
-    <content type="html"><![CDATA[<p>&amp;emsp;&amp;emsp;蓝讯的开发工具很齐全，图像化编程界面对开发者十分友好，蓝牙耳机的功能大部分可以通过图形化编程工具完成，开发效率极高。开发蓝讯系列蓝牙方案主要的开发工具有蓝讯的烧写工具Downloader，编译工具codeblock，编辑器source insight等<br>&amp;emsp;&amp;emsp;下面讲的是下载工具的安装。</p><h2 id="1-1烧写工具Downloader的安装"><a href="#1-1烧写工具Downloader的安装" class="headerlink" title="1.1烧写工具Downloader的安装"></a>1.1烧写工具Downloader的安装</h2><h3 id="文件夹Downloader-v1-2-3直接双击Downloader-exe安装。可能会出现下面的提示。"><a href="#文件夹Downloader-v1-2-3直接双击Downloader-exe安装。可能会出现下面的提示。" class="headerlink" title="文件夹Downloader_v1.2.3直接双击Downloader.exe安装。可能会出现下面的提示。"></a>文件夹Downloader_v1.2.3直接双击Downloader.exe安装。可能会出现下面的提示。</h3><p><img src="https://img-blog.csdnimg.cn/20191207000509810.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="1-1-2安装：-NET-Franmework-3-5"><a href="#1-1-2安装：-NET-Franmework-3-5" class="headerlink" title="1.1.2安装：.NET Franmework 3.5"></a>1.1.2安装：.NET Franmework 3.5</h3><p>点击下载安装此功能<br>下载界面如下：<br><img src="https://img-blog.csdnimg.cn/20191207000540409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>等待下载</p><p>下载完自动安装<br><img src="https://img-blog.csdnimg.cn/20191207000552536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="1-1-3安装完成"><a href="#1-1-3安装完成" class="headerlink" title="1.1.3安装完成"></a>1.1.3安装完成</h3><p><img src="https://img-blog.csdnimg.cn/20191207000615131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="1-1-4打开下载工具"><a href="#1-1-4打开下载工具" class="headerlink" title="1.1.4打开下载工具"></a>1.1.4打开下载工具</h3><p>安装后双击Downloader.exe即可以打开<br><img src="https://img-blog.csdnimg.cn/201912070006485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="1-1-5download工具介绍"><a href="#1-1-5download工具介绍" class="headerlink" title="1.1.5download工具介绍"></a>1.1.5download工具介绍</h3><p>先打开一个工程，以最新的76A开发包为例。打开目录AB537x\SDK_AB537X_S103_20191031\app\projects\earphone\Output\bin<br>把app.dcf文件拖进下载工具。<br><img src="https://img-blog.csdnimg.cn/20191207000730457.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019120700074421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>以上需要用到的工具的是：</p><p>1.SDK_AB537X_S103_20191031<br>2.Downloader_v1.2.3<br>资源下载地址：&#x2F;&#x2F;download.csdn.net&#x2F;download&#x2F;qq_40860986&#x2F;12017013<br>没有C币下载的话，直接私聊我吧</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&amp;amp;emsp;&amp;amp;emsp;蓝讯的开发工具很齐全，图像化编程界面对开发者十分友好，蓝牙耳机的功能大部分可以通过图形化编程工具完成，开发效率极高。开发蓝讯系列蓝牙方案主要的开发工具有蓝讯的烧写工具Downloader，编译工具codeblock，编辑器source</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="蓝讯开发基础" scheme="https://nameiscn.github.io/myblog/tags/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯--AB532X系列PWM的使用</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/</id>
-    <published>2022-07-18T16:20:37.698Z</published>
-    <updated>2022-07-18T16:16:16.624Z</updated>
-    
-    <content type="html"><![CDATA[<p>&amp;emsp;&amp;emsp;解决音箱开机噗噗声，功放IC为LTK5128  2018和8871。都是1脚低开高秒，3脚AB类&#x2F;D类转换，其他模式高电平</p><p>&amp;emsp;&amp;emsp;在初始化后，mute功放和切换AB类。</p><pre class="language-none"><code class="language-none">LOUDSPEAKER_MUTE_INIT();AMPLIFIER_SEL_INIT();LOUDSPEAKER_MUTE();AMPLIFIER_SEL_AB();</code></pre><p>在播报提示音之前恢复正常</p><pre class="language-none"><code class="language-none"> LOUDSPEAKER_UNMUTE();    AMPLIFIER_SEL_D();    delay_5ms(2);#if WARNING_POWER_ON    mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);#endif &#x2F;&#x2F; WARNING_POWER_ON</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&amp;amp;emsp;&amp;amp;emsp;解决音箱开机噗噗声，功放IC为LTK5128  2018和8871。都是1脚低开高秒，3脚AB类&amp;#x2F;D类转换，其他模式高电平&lt;/p&gt;
-&lt;p&gt;&amp;amp;emsp;&amp;amp;emsp;在初始化后，mute功放和切换AB类。&lt;/p&gt;</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="功放" scheme="https://nameiscn.github.io/myblog/tags/%E5%8A%9F%E6%94%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/</id>
-    <published>2022-07-18T16:20:37.695Z</published>
-    <updated>2022-07-18T16:20:26.917Z</updated>
-    
-    <content type="html"><![CDATA[<p>56A进入CBT模式：<br>&amp;emsp;&amp;emsp;配置工具默认是这样的：<br><img src="https://img-blog.csdnimg.cn/20191018002251728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;配置工具只支持5击进入CBT模式。客户需求是3击，进入CBT模式后蓝灯500ms周期闪烁下面是实现过程。</p><p>&amp;emsp;&amp;emsp;在消息处理msg_bt.c中添加三击处理</p><pre class="language-none"><code class="language-none">case KTH_PLAY_PWR_USER_DEF:    &#x2F;&#x2F;&#x2F;三击进CBT测试模式&#x2F;&#x2F;        printf(&quot;KTH_PLAY_PWR_USER_DEF\n&quot;);        &#x2F;&#x2F;led_set_sta(0x00,0xaa,10,0);        led_on();        if (!bt_nor_is_connected()) &#123;            printf(&quot;FUNC_BT_CBT\n&quot;);            if(xcfg_cb.bb_cbt_test_en &#x3D;&#x3D; 0)            &#123;                xcfg_cb.bb_cbt_test_en &#x3D; 1;                led_set_sta(0x00, 0xaa, 5, 0);                          &#x2F;&#x2F;蓝灯500ms周期闪烁，                bt_cfg.cbt_test_mode &#x3D; xcfg_cb.bb_cbt_test_en;            &#125;        &#125;        break;</code></pre><p>&amp;emsp;&amp;emsp;led_set_sta函数使用方法：</p><pre class="language-none"><code class="language-none">void led_set_sta(u8 rled_sta, u8 bled_sta, u8 uint, u8 period);led_set_sta(0x00, 0xaa, 5, 0); </code></pre><p>&amp;emsp;rled_sta红灯的状态，对应配置工具的红灯点<br>&amp;emsp;bled_sta蓝灯的状态，对应配置工具的蓝灯点</p><p><img src="https://img-blog.csdnimg.cn/20191018002546230.png" alt="在这里插入图片描述"></p><p>&amp;emsp;uint表示一个单位时间&#x3D;uint*50ms<br>&amp;emsp;period表示闪灯周期</p><p>&amp;emsp;led_set_sta(0x00, 0xaa, 5, 0);<br>&amp;emsp;相当于<br><img src="https://img-blog.csdnimg.cn/20191018002613556.png" alt="在这里插入图片描述"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;56A进入CBT模式：&lt;br&gt;&amp;amp;emsp;&amp;amp;emsp;配置工具默认是这样的：&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20191018002251728.png?x-oss-process=image/waterma</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="AB537X" scheme="https://nameiscn.github.io/myblog/tags/AB537X/"/>
-    
-    <category term="CBT" scheme="https://nameiscn.github.io/myblog/tags/CBT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯蓝牙耳机SDK解析</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BASDK%E8%A7%A3%E6%9E%90/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BASDK%E8%A7%A3%E6%9E%90/</id>
-    <published>2022-07-18T16:12:18.432Z</published>
-    <updated>2022-07-18T16:12:01.695Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="SDK结构"><a href="#SDK结构" class="headerlink" title="SDK结构"></a>SDK结构</h2><h4 id="1-1SDK目录结构"><a href="#1-1SDK目录结构" class="headerlink" title="1.1SDK目录结构"></a>1.1SDK目录结构</h4><pre class="language-none"><code class="language-none">└─app    ├─platform           │  ├─bsp       &#x2F;&#x2F;底层外设相关    │  ├─functions   &#x2F;&#x2F;功能相关    │  ├─gui        &#x2F;&#x2F;显示功能    │  ├─header    │  └─libs    └─projects&#x2F;&#x2F;调用API        └─earphone            ├─display   &#x2F;&#x2F;显示            ├─message  &#x2F;&#x2F;消息处理            ├─Output   &#x2F;&#x2F;文件输出            │  └─bin   &#x2F;&#x2F;音乐文件，配置            │      ├─res            │      │  ├─en            │      │  ├─eq            │      │  └─zh            │      └─Settings            │          └─Resources            │              ├─S6            │              │  ├─en            │              │  └─zh            │              └─TWS            │                  ├─en            │                  └─zh            ├─plugin&#x2F;&#x2F;插件            └─port&#x2F;&#x2F;移植</code></pre><h5 id="1-1-1bsp目录"><a href="#1-1-1bsp目录" class="headerlink" title="1.1.1bsp目录"></a>1.1.1bsp目录</h5><p>该目录下，包含一些和底层硬件相关的数据，函数初始化</p><p><img src="https://img-blog.csdnimg.cn/20200301172832299.png" alt="在这里插入图片描述"></p><h5 id="1-1-2functions目录"><a href="#1-1-2functions目录" class="headerlink" title="1.1.2functions目录"></a>1.1.2functions目录</h5><p>主要包括蓝牙功能的实现，大部分的函数以库函数的形式提供<br> <img src="https://img-blog.csdnimg.cn/20200301172849850.png" alt="在这里插入图片描述"></p><h5 id="1-1-3Message目录"><a href="#1-1-3Message目录" class="headerlink" title="1.1.3Message目录"></a>1.1.3Message目录</h5><p>主要包括按键消息处理，是蓝牙方案经常需要改动的目录<br> <img src="https://img-blog.csdnimg.cn/20200301172856481.png" alt="在这里插入图片描述"></p><h5 id="1-1-4Plugin目录"><a href="#1-1-4Plugin目录" class="headerlink" title="1.1.4Plugin目录"></a>1.1.4Plugin目录</h5><p>音乐文件的调用，基本不会去修改这里<br> <img src="https://img-blog.csdnimg.cn/20200301172909689.png" alt="在这里插入图片描述"></p><h5 id="1-1-5Port目录"><a href="#1-1-5Port目录" class="headerlink" title="1.1.5Port目录"></a>1.1.5Port目录</h5><p>主要包括硬件外设的调用，mani函数</p><p> <img src="https://img-blog.csdnimg.cn/20200301172905332.png" alt="在这里插入图片描述"></p><h3 id="2代码运行流程"><a href="#2代码运行流程" class="headerlink" title="2代码运行流程"></a>2代码运行流程</h3><h4 id="2-1初始化"><a href="#2-1初始化" class="headerlink" title="2.1初始化"></a>2.1初始化</h4><pre class="language-none"><code class="language-none">&#x2F;&#x2F;正常启动Main函数int main(void)&#123;    printf(&quot;Hello AB533X!\n&quot;);    bsp_sys_init();    func_run();    return 0;&#125;</code></pre><p>bsp_sys_init();函数主要包括各种功能的初始化，<strong>获取download工具的配置。</strong><br>func_run();主要是处理蓝牙消息和硬件的消息。</p><h4 id="2-2各模式循环"><a href="#2-2各模式循环" class="headerlink" title="2.2各模式循环"></a>2.2各模式循环</h4><p>初始化之后，进入一个FUN函数，蓝牙耳机的FUN函数基本上都在跑func_bt</p><pre class="language-none"><code class="language-none">void func_run(void)&#123;    printf(&quot;%s\n&quot;, __func__);    &#x2F;&#x2F;func_cb.sta &#x3D; FUNC_AUX;    while (1) &#123;        func_clear();        switch (func_cb.sta) &#123;#if FUNC_BT_EN        case FUNC_BT:            func_bt();            break;#endif#if FUNC_BTHID_EN        case FUNC_BTHID:            func_bthid();            break;#endif &#x2F;&#x2F; FUNC_BTHID_EN#if FUNC_AUX_EN        case FUNC_AUX:            func_aux();            break;#endif &#x2F;&#x2F; FUNC_AUX_EN        case FUNC_PWROFF:            func_pwroff(sys_cb.pwrdwn_tone_en);            break;        case FUNC_BT_CBT:            func_bt_cbt();            break;        default:            func_exit();            break;        &#125;    &#125;&#125;</code></pre><h4 id="2-3蓝牙模式"><a href="#2-3蓝牙模式" class="headerlink" title="2.3蓝牙模式"></a>2.3蓝牙模式</h4><pre class="language-none"><code class="language-none">AT(.text.func.bt)void func_bt(void)&#123;    printf(&quot;func_bt\n&quot;);    func_bt_enter();    while (func_cb.sta &#x3D;&#x3D; FUNC_BT) &#123;        func_bt_process();        func_bt_message(msg_dequeue());    &#125;    func_bt_exit();&#125;</code></pre><p>在程序跑到func_bt();的时候，SDK留给开发者处理的只有消息处理和电量检测，来电检测等，蓝牙耳机接收音频信号，解码那些都是屏蔽起来的。<br>printf(“%s\n”, <strong>func</strong>);</p><h5 id="2-3-1进入蓝牙模式"><a href="#2-3-1进入蓝牙模式" class="headerlink" title="2.3.1进入蓝牙模式"></a>2.3.1进入蓝牙模式</h5><p>func_bt_enter();<br>主要执行蓝牙初始化，播报提示音</p><h5 id="2-3-2蓝牙模式大循环"><a href="#2-3-2蓝牙模式大循环" class="headerlink" title="2.3.2蓝牙模式大循环"></a>2.3.2蓝牙模式大循环</h5><p>func_bt_process();<br>包括响铃，通话，蓝牙音乐<br>sfunc_bt_ring();<br>sfunc_bt_call();</p><p>func_bt_message(msg_dequeue());<br>消息处理</p><h5 id="2-3-3补充"><a href="#2-3-3补充" class="headerlink" title="2.3.3补充"></a>2.3.3补充</h5><p>C语言的特殊宏<br>LINE 表示正在编译的文件的行号<br>FILE 表示正在编译的文件的名字<br>DATE_ 表示编译时刻的日期字符串，例如： “25 Dec 2007”<br>TIME 表示编译时刻的时间字符串，例如： “12:30:55”</p><pre class="language-none"><code class="language-none">#include &lt;stdio.h&gt;int main(void)&#123;        printf(&quot;%s\r\n&quot;,__FILE__);        printf(&quot;%d\r\n&quot;,__LINE__);        printf(&quot;%s\r\n&quot;,__DATE__);        printf(&quot;%s\r\n&quot;,__TIME__);        return 0;&#125;</code></pre><p>打印结果</p><pre class="language-none"><code class="language-none">speci_define.c6Jul  6 201900:46:39</code></pre><h4 id="2-4消息"><a href="#2-4消息" class="headerlink" title="2.4消息"></a>2.4消息</h4><p>经常需要改动的部分</p><h5 id="2-4-1消息处理："><a href="#2-4-1消息处理：" class="headerlink" title="2.4.1消息处理："></a>2.4.1消息处理：</h5><p>二次开发中修改最多的部分就是消息处理这一块，按键消息处理的修改最多。按键消息有长按，短按，双击，三击，四击，五击等等<br>Func函数的为例</p><pre class="language-none"><code class="language-none">AT(.text.func.msg)void func_message(u16 msg)&#123;    switch (msg) &#123;        case KL_NEXT_VOL_UP:&#x2F;&#x2F;如果长按NEXT_VOL_UP这个按键            if (sfunc_bt_call_flag) &#123;……            break;&#125;……&#125;</code></pre><h5 id="2-4-2消息来源："><a href="#2-4-2消息来源：" class="headerlink" title="2.4.2消息来源："></a>2.4.2消息来源：</h5><p>以按键为例</p><pre class="language-none"><code class="language-none">void msg_enqueue(u16 msg);&#x2F;&#x2F;消息队列</code></pre><p>在程序中执行按键扫描函数：</p><pre class="language-none"><code class="language-none">u8 bsp_key_scan(void)&#123;    u8 key_val &#x3D; NO_KEY;    u16 key &#x3D; NO_KEY;    pwrkey_2_hw_pwroff_detect();    if (!get_adc_val()) &#123;        return NO_KEY;    &#125;#if USER_ADKEY    key_val &#x3D; get_adkey(adc_cb.key_val, xcfg_cb.user_adkey_en);#endif &#x2F;&#x2F; USER_ADKEY#if USER_ADKEY2    if (key_val &#x3D;&#x3D; NO_KEY) &#123;        key_val &#x3D; get_adkey2();    &#125;#endif &#x2F;&#x2F; USER_ADKEY2#if USER_IOKEY    if (key_val &#x3D;&#x3D; NO_KEY) &#123;        key_val &#x3D; get_iokey();    &#125;#endif &#x2F;&#x2F; USER_IOKEY#if USER_PWRKEY    if (key_val &#x3D;&#x3D; NO_KEY) &#123;        key_val &#x3D; get_pwrkey();    &#125;#endif &#x2F;&#x2F; USER_PWRKEY#if VBAT_DETECT_EN    sys_cb.vbat &#x3D; get_vbat_val();#endif &#x2F;&#x2F; VBAT_DETECT_EN#if (IRRX_SW_EN || IRRX_HW_EN)    if (key_val &#x3D;&#x3D; NO_KEY) &#123;        key_val &#x3D; get_irkey();    &#125;#endif &#x2F;&#x2F; (IRRX_SW_EN || IRRX_HW_EN)#if USER_ADKEY_MUX_SDCLK    &#x2F;&#x2F;需要放到最后处理,当没进行adc convert需要返回    if (key_val &#x3D;&#x3D; NO_KEY) &#123;        if (!adc_cb.sdclk_valid) &#123;            return NO_KEY;        &#125;        key_val &#x3D; get_adkey(adc_cb.sdclk_val, xcfg_cb.user_adkey_mux_sdclk_en);    &#125;#endif &#x2F;&#x2F; USER_ADKEY_MUX_SDCLK    key &#x3D; bsp_key_process(key_val);&#x2F;&#x2F;得到具体按下哪个按键    if (key !&#x3D; NO_KEY) &#123;        &#x2F;&#x2F;printf(&quot;enqueue: %04x\n&quot;, key);        if ((key &amp; KEY_TYPE_MASK) &#x3D;&#x3D; KEY_LONG_UP) &#123;            msg_queue_detach(key | KEY_HOLD);       &#x2F;&#x2F;长按抬键，先清掉HOLD按键消息        &#125;#if KEY_MSG_REMAP_EN        key_msg_remap(&amp;key);   &#x2F;&#x2F;按键重映射.#endif        msg_enqueue(key);&#x2F;&#x2F;把消息放到消息队列    &#125;    return key_val;&#125;</code></pre><h5 id="2-4-3按键消息的注意事项："><a href="#2-4-3按键消息的注意事项：" class="headerlink" title="2.4.3按键消息的注意事项："></a>2.4.3按键消息的注意事项：</h5><p>下面的宏都是按键消息：<br>以PLAY按键为例</p><pre class="language-none"><code class="language-none">#define K_PLAY                  (KEY_PLAY | KEY_SHORT)&#x2F;&#x2F;下降沿#define KU_PLAY                 (KEY_PLAY | KEY_SHORT_UP)          &#x2F;&#x2F;上升沿#define KL_PLAY                 (KEY_PLAY | KEY_LONG) &#x2F;&#x2F;长按#define KLU_PLAY                (KEY_PLAY | KEY_LONG_UP) &#x2F;&#x2F;长按上升沿#define KH_PLAY                 (KEY_PLAY | KEY_HOLD) &#x2F;&#x2F;长按2秒左右#define KD_PLAY                 (KEY_PLAY | KEY_DOUBLE) &#x2F;&#x2F;双击#define KTH_PLAY                (KEY_PLAY | KEY_THREE) &#x2F;&#x2F;三击#define KFO_PLAY                (KEY_PLAY | KEY_FOUR) &#x2F;&#x2F;四击#define KFI_PLAY                (KEY_PLAY | KEY_FIVE) &#x2F;&#x2F;五击</code></pre><p>注意！每次按键都会触发下降沿。<br>以蓝牙模式为例：<br>程序先在func_bt_message函数做判断，如果在该函数没有找到一致的case，则会跑到公共的消息处理函数中 void func_message(u16 msg) 再做判断。</p><pre class="language-none"><code class="language-none">AT(.text.func.bt.msg)void func_bt_message(u16 msg)&#123;    switch (msg) &#123;    case KU_PLAY:    case KU_PLAY_POWER:    case KU_PLAY_MODE:        bt_music_play_pause();        f_bt.pp_2_unmute &#x3D; sys_cb.mute;        break;    case KU_PREV_VOL_DOWN:    case KL_VOL_DOWN_PREV:    case KU_PREV:        bt_music_prev();        sys_cb.key2unmute_cnt &#x3D; 15 * sys_cb.mute;        break;……    default:        func_message(msg);        break;</code></pre><h5 id="2-4-4应用：1S消息"><a href="#2-4-4应用：1S消息" class="headerlink" title="2.4.4应用：1S消息"></a>2.4.4应用：1S消息</h5><p>再定时器中，每隔一秒发送一个消息MSG_SYS_1S</p><pre class="language-none"><code class="language-none">msg_enqueue(MSG_SYS_1S);    void usr_tmr5ms_isr(void)&#123;&#x2F;&#x2F;1s timer process    if ((tmr5ms_cnt % 200) &#x3D;&#x3D; 0) &#123;        msg_enqueue(MSG_SYS_1S);        tmr5ms_cnt &#x3D; 0;        sys_cb.lpwr_warning_cnt++;    &#125;&#125;</code></pre><p>再蓝牙消息或者公共消息做处理，常用的1秒消息处理有报告电量，连接蓝牙自动播放。</p><pre class="language-none"><code class="language-none">case MSG_SYS_1S:      bt_send_msg(BT_MSG_HFP_REPORT_BAT);      break;</code></pre><h5 id="2-4-5蓝牙消息函数："><a href="#2-4-5蓝牙消息函数：" class="headerlink" title="2.4.5蓝牙消息函数："></a>2.4.5蓝牙消息函数：</h5><p>三个状态的消息处理，蓝牙模式比较特殊，除了一个func_bt_message还有两个，响铃，通话。</p><p>响铃:void sfunc_bt_ring_message(u16 msg)<br>来电响铃的时候执行消息处理，主要包括接&#x2F;挂电话，电量报告和按键消息公共处理。</p><pre class="language-none"><code class="language-none">AT(.text.func.btring.msg)void sfunc_bt_ring_message(u16 msg)&#123;    switch (msg) &#123;    case KU_PLAY:    case KU_HSF:                &#x2F;&#x2F;接听    case KU_PLAY_POWER:    case KU_PLAY_MODE:        bsp_clr_mute_sta();        bt_call_answer_incoming();        break;    case KD_PLAY:    case KL_HSF:    case KD_HSF:        bsp_clr_mute_sta();        bt_call_terminate();    &#x2F;&#x2F;挂断        break;    case MSG_SYS_1S:        bt_send_msg(BT_MSG_HFP_REPORT_BAT);        break;    default:        func_message(msg);        break;    &#125;&#125;</code></pre><p>通话中:sfunc_bt_call_message();<br>通话过程的按键消息处理，主要包括音量调整，三方通话，电量报告</p><p>Music: void func_bt_message(u16 msg)<br>    蓝牙音乐模式的消息处理，上下曲切换，暂停播放，音量调整，报告电池电量等</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;SDK结构&quot;&gt;&lt;a href=&quot;#SDK结构&quot; class=&quot;headerlink&quot; title=&quot;SDK结构&quot;&gt;&lt;/a&gt;SDK结构&lt;/h2&gt;&lt;h4 id=&quot;1-1SDK目录结构&quot;&gt;&lt;a href=&quot;#1-1SDK目录结构&quot; class=&quot;headerlink&quot; </summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="蓝讯教程" scheme="https://nameiscn.github.io/myblog/tags/%E8%93%9D%E8%AE%AF%E6%95%99%E7%A8%8B/"/>
-    
-    <category term="SDK" scheme="https://nameiscn.github.io/myblog/tags/SDK/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯AB5325A音箱回连慢解决方法</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</id>
-    <published>2022-07-18T16:12:18.416Z</published>
-    <updated>2022-07-18T16:11:29.517Z</updated>
-    
-    <content type="html"><![CDATA[<p>SDK版本：AB532X_S9170</p><p>解决方法：</p><p>未回连的状态下，在程序中调用回连函数<br>程序处理：<br>在1秒调用消息中添加判断，是否有回连信息<code>bt_nor_get_link_info(NULL)</code>和蓝牙是否处于配对状态<code>!(bt_nor_is_connected())</code>。两者都满足则调用一次回连函数。直到回连上设备。</p><pre class="language-none"><code class="language-none">  case MSG_SYS_1S:      bt_send_msg(BT_MSG_HFP_REPORT_BAT);if(bt_nor_get_link_info(NULL) &amp;&amp; !(bt_nor_is_connected()) )&#123;bt_connect();&#125;      break;</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;SDK版本：AB532X_S9170&lt;/p&gt;
-&lt;p&gt;解决方法：&lt;/p&gt;
-&lt;p&gt;未回连的状态下，在程序中调用回连函数&lt;br&gt;程序处理：&lt;br&gt;在1秒调用消息中添加判断，是否有回连信息&lt;code&gt;bt_nor_get_link_info(NULL)&lt;/code&gt;和蓝牙是否处于配</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="回连" scheme="https://nameiscn.github.io/myblog/tags/%E5%9B%9E%E8%BF%9E/"/>
-    
-    <category term="532x" scheme="https://nameiscn.github.io/myblog/tags/532x/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯--AB536X系列PWM的使用</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</id>
-    <published>2022-07-18T16:12:18.414Z</published>
-    <updated>2022-07-18T16:10:48.829Z</updated>
-    
-    <content type="html"><![CDATA[<p>AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时输出。<br> AB536X 每组 timer定时器 对应 PWM IO 说明：<br>Timer3:</p><pre class="language-none"><code class="language-none">G1: PWM0-&gt;PB0  PWM1-&gt;PB1  PWM2-&gt;PB2G2: PWM0-&gt;PB3  PWM1-&gt;PB4  PWM2-&gt;PB5G3: PWM0-&gt;PF2  PWM1-&gt;PA3  PWM2-&gt;PA4G4: PWM0-&gt;PE0</code></pre><p>Timer4:</p><pre class="language-none"><code class="language-none">G1: PWM0-&gt;PE5  PWM1-&gt;PE6  PWM2-&gt;PE7G2:      PWM1-&gt;PF1  PWM2-&gt;PF1</code></pre><p>Timer5:</p><pre class="language-none"><code class="language-none">G1: PWM0-&gt;PA5  PWM1-&gt;PA6  PWM2-&gt;PA7</code></pre><p>FUNCMCON2 对应 PWM 的映射：<br>timer3-&gt;8Bit    timer4-&gt;12Bit  timer5-&gt;16Bit<br>G1-&gt;1 G2-&gt;2 ……..<br>例如：<br>Timer3 的 G1 组：<br>FUNCMCON2 &#x3D; (1&lt;&lt;8);<br>Timer3 的 G3 组：<br>FUNCMCON2 &#x3D; (3&lt;&lt;8);<br>Timer4 的 G1 组：<br>FUNCMCON2 &#x3D; (1&lt;&lt;12);</p><p>备注：<br>查询 AB536X 每组 timer 对应 PWM IO需要查阅芯片datasheet，以上数据查找自《AB5362B DataSheet》<br>查找FUNCMCON2 寄存器功能《AB536X UserManual》<br>使用出现问题请复查以上提及的文档。</p><p>SDK 默认定时器用途：<br>timer0 : 系统时钟使用<br>timer1: (可选) ledseg_ajust. 7 脚屏的时候使用  timer1_irq_init<br>timer3: (可选) 软件红外解码使用 </p><p><strong>但6x系列芯片的定时器没有被占用，可以放心使用</strong></p><p>例程：下面以 timer4 为例<br>初始化：</p><pre class="language-none"><code class="language-none">#define PWM_MAX                     4001    void pwm_init(void)&#123;    &#x2F;&#x2F;PWM2-T4-G1 PE7    &#x2F;&#x2F;PWM1-T4-G1 PE6    &#x2F;&#x2F;PWM0-T4-G1 PE5    GPIOEDIR &amp;&#x3D; ~(BIT(7)|BIT(6)|BIT(5)) ; &#x2F;&#x2F;DIR OUTGPIOEDE |&#x3D; (BIT(7)|BIT(6)|BIT(5)) ; &#x2F;&#x2F;数字 IO 口要设置上.GPIOEFEN |&#x3D; (BIT(7)|BIT(6)|BIT(5)); &#x2F;&#x2F;function io enableFUNCMCON2 &#x3D; (1 &lt;&lt; 12); &#x2F;&#x2F; TIMER4的G1   pwm map to G1 (PE5&#x2F;6&#x2F;7)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8BitTMR4CON &#x3D; 0x00; &#x2F;&#x2F;时钟源默认为系统时钟 24MTMR4CNT &#x3D; 0;TMR4PR &#x3D; PWM_MAX + 1; &#x2F;&#x2F;例如为 24M 时, 频率为 24M&#x2F;(12000*4) &#x3D; 500HZ, 即周期为0.002S. &#x2F;&#x2F;U32TMR4DUTY0 &#x3D; 0 ; &#x2F;&#x2F;u16 &#x2F;&#x2F;25% 负占空比 PE1 &#x2F;&#x2F;注意 PR &gt;&#x3D; DUTY &#x2F;&#x2F;DUTY &#x3D;&#x3D;PR, 全高. -1 (也就是 0xFFFF)时, 全低, 其他值表示&quot;负占空比&quot;TMR4DUTY1 &#x3D; 0;  &#x2F;&#x2F;u16 &#x2F;&#x2F;50% 负占空比 PB3    TMR4DUTY2 &#x3D; 0;  &#x2F;&#x2F;TMR4CON |&#x3D;(BIT(9) | BIT(10) | BIT(11)); &#x2F;&#x2F;timer4 pwm0, pwm1, pwm2 enableTMR4CON |&#x3D; BIT(0); &#x2F;&#x2F;Timer enable (defualt work in counter mode)&#125;</code></pre><p>扫描：<br>呼吸灯扫描放5ms中断，用作频谱灯需要放1ms中断，例程是简单的呼吸灯效果。主要是调整占空比 duty &#x3D; TMR4DUTY0 &#x2F;TMR4PR ;</p><pre class="language-none"><code class="language-none">AT(.com_text.rgb)void rgb_breath_scan(void)&#123; &#x2F;&#x2F; 5ms  放5ms中断    static u16 cnt &#x3D; 0;    static u8 dir &#x3D; 0;    if(dir&#x3D;&#x3D;0)&#123;        if(cnt&lt;PWM_MAX)&#123;            cnt+&#x3D;7;        &#125;else&#123;            dir &#x3D;1;        &#125;    &#125;else if(dir&#x3D;&#x3D;1)&#123;          if(cnt&gt;7)&#123;            cnt-&#x3D;7;        &#125;else&#123;            dir &#x3D;0;        &#125;    &#125;TMR4DUTY0 &#x3D; cnt ; TMR4DUTY1 &#x3D; cnt;      TMR4DUTY2 &#x3D; cnt; &#125;</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时输出。&lt;br&gt; AB536X 每组</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="PWM" scheme="https://nameiscn.github.io/myblog/tags/PWM/"/>
-    
-    <category term="536X" scheme="https://nameiscn.github.io/myblog/tags/536X/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯--AB532X系列PWM的使用</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2022-07-18T16:12:18.409Z</published>
-    <updated>2022-07-18T16:27:16.716Z</updated>
-    
-    <content type="html"><![CDATA[<pre class="language-none"><code class="language-none">实例：PB3实现呼吸灯</code></pre><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>在pwm_port_init函数下</p><pre class="language-none"><code class="language-none">GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUTGPIOBDE |&#x3D; BIT(3); &#x2F;&#x2F;数字 IO 口要设置上.GPIOBFEN |&#x3D; BIT(3); &#x2F;&#x2F;function io enableFUNCMCON2 &#x3D; (2 &lt;&lt; 8); &#x2F;&#x2F; TIMER3的G2   pwm map to G1 (PE1&#x2F;2&#x2F;3)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8BitTMR3CON &#x3D; 0x00; &#x2F;&#x2F;时钟源默认为系统时钟 24MTMR3CNT &#x3D; 0;TMR3PR &#x3D; 1000; &#x2F;&#x2F;例如为 24M 时, 频率为 24M&#x2F;(12000*4) &#x3D; 500HZ, 即周期为0.002S. &#x2F;&#x2F;U32&#x2F;&#x2F;TMR3DUTY0 &#x3D; 12000 - 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;25% 负占空比 PE1 &#x2F;&#x2F;注意 PR &gt;&#x3D; DUTY &#x2F;&#x2F;DUTY &#x3D;&#x3D;PR, 全高. -1 (也就是 0xFFFF)时, 全低, 其他值表示&quot;负占空比&quot;TMR3DUTY1 &#x3D; 1000-1; &#x2F;&#x2F;u16 &#x2F;&#x2F;50% 负占空比 PB2&#x2F;&#x2F;TMR3DUTY2 &#x3D; 12000*3- 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;75% 负占空比 PE3TMR3CON |&#x3D; BIT(10); &#x2F;&#x2F;timer5 pwm0, pwm1, pwm2 enableTMR3CON |&#x3D; BIT(0); &#x2F;&#x2F;Timer enable (defualt work in counter mode)</code></pre><p>注意：<br>如果是在port_pwm.c下写的初始化函数。<br>打开这个宏，不然程序不会执行</p><pre class="language-none"><code class="language-none">#define TIMER_PWM_EN                    1           &#x2F;&#x2F;TIMER的PWM区别于LPWM</code></pre><p>在bsp_sys_init函数下调用初始化函数</p><pre class="language-none"><code class="language-none">#if PWM_RGB_EN    pwm_init();#endif &#x2F;&#x2F; PWM_RGB_EN    pwm_port_init();    &#x2F;&#x2F;&#x2F; enable user timer for display &amp; dac    sys_set_tmr_enable(1, 1);</code></pre><h4 id="编写扫描函数"><a href="#编写扫描函数" class="headerlink" title="编写扫描函数"></a>编写扫描函数</h4><pre class="language-none"><code class="language-none">AT(.com_text.rgb)void rgb_breath_scan(void)      &#x2F;&#x2F; 5ms  放5ms中断&#123;    static u8 cnt &#x3D; 0;    static u8 dir &#x3D; 0;    static u16 cduty &#x3D; 0;    cnt++;    if(cnt&gt;&#x3D;20)&#123;        if(dir&#x3D;&#x3D;0)&#123;        if(cduty&lt;999)&#123;            cduty &#x3D; cduty + 9;        &#125;else&#123;            dir &#x3D; 1;            cduty &#x3D; 999;        &#125;        &#125;else&#123;            if(cduty&gt;9)            &#123;                 cduty &#x3D; cduty - 9;            &#125;else&#123;                dir &#x3D; 0;                cduty &#x3D; 0;            &#125;        &#125;        cnt &#x3D; 0;    &#125;        TMR3DUTY1 &#x3D; cduty;&#125;</code></pre><h3 id="调用扫描函数"><a href="#调用扫描函数" class="headerlink" title="调用扫描函数"></a>调用扫描函数</h3><p>在usr_tmr5ms_isr下调用，增加的标志位为真代表播放状态，否则是暂停状态</p><pre class="language-none"><code class="language-none">if(RGB_LED_flag)&#123;        rgb_breath_scan();   &#125;else&#123;    TMR3DUTY1&#x3D;999;   &#125;</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;实例：
-PB3实现呼吸灯&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;初始化&quot;&gt;&lt;a href=&quot;#初始化&quot; class=&quot;headerlink&quot; title=&quot;初始化&quot;</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="PWM" scheme="https://nameiscn.github.io/myblog/tags/PWM/"/>
-    
-    <category term="532X" scheme="https://nameiscn.github.io/myblog/tags/532X/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中科蓝讯--AB532X系列TWS的接口调用</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/</id>
-    <published>2022-07-18T16:03:50.557Z</published>
-    <updated>2022-07-18T16:09:36.335Z</updated>
-    
-    <content type="html"><![CDATA[<p>TWS的按键操作：<br>长按mode按键TWS配对，长按连接手机&#x2F;回连手机</p><pre class="language-none"><code class="language-none">if(xcfg_cb.bt_tws_en &amp;&amp; xcfg_cb.bt_tws_pair_mode &#x3D;&#x3D; 2)&#123;if(bt_tws_is_connected()) &#123;&#125; else &#123;bt_tws_search_slave();printf(&quot;bt_tws_search_slave\n&quot;);&#125;&#125;if(bt_nor_is_connected())&#123;&#x2F;&#x2F;手机已经连接printf(&quot;disconnect with boletooth\n&quot;);bsp_clr_mute_sta();bt_nor_disconnect();&#x2F;&#x2F;M键断开手机蓝牙.或者bt_disconnect()    &#125;else&#123;printf(&quot;connect with boletooth\n&quot;);bt_connect();&#x2F;&#x2F;bt_nor_connect();&#x2F;&#x2F;M键回连手机蓝牙&#125;</code></pre><p>从提示音得到主从机信息，和蓝牙耳机的有所不同<br>void func_bt_warning(void);</p><pre class="language-none"><code class="language-none">if(left_warning) &#123; &#x2F;&#x2F;left channel       &#x2F;&#x2F;slave            func_cb.mp3_res_play(RES_BUF_LEFT_CH_MP3, RES_LEN_LEFT_CH_MP3);printf(&quot;         slave   slave            \n&quot;);    get_tws_chanl&#x3D;2;&#x2F;&#x2F;副机等于2        &#125;        if(right_warning) &#123;  &#x2F;&#x2F;right channel      &#x2F;&#x2F;master            delay_5ms(200);            func_cb.mp3_res_play(RES_BUF_RIGHT_CH_MP3, RES_LEN_RIGHT_CH_MP3);    printf(&quot;         master   master            \n&quot;);get_tws_chanl&#x3D;1;&#x2F;&#x2F;主机等于1        &#125;</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;TWS的按键操作：&lt;br&gt;长按mode按键TWS配对，长按连接手机&amp;#x2F;回连手机&lt;/p&gt;
-&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;if(xcfg_cb.bt_tws_en &amp;amp;&amp;amp; xc</summary>
-      
-    
-    
-    
-    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="532X" scheme="https://nameiscn.github.io/myblog/tags/532X/"/>
-    
-    <category term="TWS" scheme="https://nameiscn.github.io/myblog/tags/TWS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/16/hello-world/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/16/hello-world/</id>
-    <published>2022-07-16T14:59:18.069Z</published>
-    <updated>2022-07-16T14:59:18.069Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
+    <category term="Anaconda" scheme="https://nameiscn.github.io/myblog/tags/Anaconda/"/>
     
   </entry>
   
