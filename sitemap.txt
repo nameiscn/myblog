@@ -7,4 +7,7 @@ https://nameiscn.github.io/myblog
 https://nameiscn.github.io/myblog/tags/Python/
 https://nameiscn.github.io/myblog/tags/Windows/
 https://nameiscn.github.io/myblog/tags/Anaconda/
+https://nameiscn.github.io/myblog/tags/PWM/
+https://nameiscn.github.io/myblog/tags/532X/
 https://nameiscn.github.io/myblog/categories/Python/
+https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/

@@ -76,10 +76,31 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://nameiscn.github.io/myblog/tags/PWM/</loc>
+    <lastmod>2022-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nameiscn.github.io/myblog/tags/532X/</loc>
+    <lastmod>2022-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
     <loc>https://nameiscn.github.io/myblog/categories/Python/</loc>
+    <lastmod>2022-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2022-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
