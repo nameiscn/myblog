@@ -1,1660 +1,278 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-
-
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="bluetrum  Bluetooth">
-    <meta name="description" content="JS">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
-    
-
-    <title>JS</title>
-    <link rel="icon" type="image/png" href="/myblog/favicon.png">
-
-    <link rel="stylesheet" type="text/css" href="/myblog/libs/awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/myblog/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/myblog/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/myblog/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/myblog/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/myblog/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/myblog/css/my.css">
-
-    <script src="/myblog/libs/jquery/jquery-3.6.0.min.js"></script>
-
-<meta name="generator" content="Hexo 6.2.0"></head>
-
-
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/myblog/" class="waves-effect waves-light">
-                    
-                    <img src="/myblog/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">JS</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/myblog/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/myblog/medias/logo.png" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">JS</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/myblog/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-    </ul>
-</div>
-
-
-        </div>
-
-        
-    </nav>
-
-</header>
-
-    
-<style>
-    .carousel-control {
-        width: 45px;
-        height: 45px;
-        line-height: 55px;
-        border-radius: 45px;
-        background: transparent;
-        cursor: pointer;
-        z-index: 100;
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>JS</title><meta name="keywords" content="bluetrum  Bluetooth"><meta name="author" content="JSmcu"><meta name="copyright" content="JSmcu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="JS">
+<meta property="og:url" content="https://nameiscn.github.io/myblog/index.html">
+<meta property="og:site_name" content="JS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="JSmcu">
+<meta property="article:tag" content="bluetrum  Bluetooth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/myblog/img/favicon.png"><link rel="canonical" href="https://nameiscn.github.io/myblog/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/myblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/myblog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
     }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JS',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-07-20 22:50:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-    #prev-cover {
-        position: absolute;
-        top: 48%;
-        left: 8px;
-    }
-
-    #next-cover {
-        position: absolute;
-        top: 48%;
-        right: 8px;;
-    }
-
-    #prev-cover i {
-        margin-right: 3px;
-    }
-
-    #next-cover i {
-        margin-left: 3px;
-    }
-
-    .carousel-control:hover {
-        background-color: rgba(0, 0, 0, .4);
-    }
-
-    .carousel-control i {
-        color: #fff;
-        font-size: 2.4rem;
-    }
-</style>
-
-
-
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
-        <div id="prev-cover" class="left waves-effect carousel-control">
-            <i class="icon fa fa-angle-left"></i>
-        </div>
-        <div id="next-cover" class="right waves-effect carousel-control">
-            <i class="icon fa fa-angle-right"></i>
-        </div>
-    
-
-    <div class="carousel-item  white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                    subtitle
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/myblog/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/myblog/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-
-
-
-            <div class="cover-btns">
-                <a href="#indexCard" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
-
-                
-            </div>
-            <div class="cover-social-link">
-
-
-    <a href="mailto:kefu2132@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2142686503" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2142686503" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-    <a href="https://www.zhihu.com/people/jsmcu" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/jsmcu" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
-    </a>
-
-
-
-</div>
-        </div>
-    </div>
-
-    
-        
-
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/12.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">Hello World</div>
-                            <div class="description center-align">
-                                
-                                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/16/hello-world/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/10.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝汛--AB5335系列蓝牙信号超出距离的处理</div>
-                            <div class="description center-align">
-                                
-                                    1.超出距离的消息处理会执行到下面这个函数的消息处理
-void bt_emit_notice(uint evt, u32 param)
-
-
-case BT_NOTICE_LOSTCONNECT:
-        connect_lost_f
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/10.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯--AB532X系列PWM的使用</div>
-                            <div class="description center-align">
-                                
-                                    实例：
-PB3实现呼吸灯
-
-初始化在pwm_port_init函数下
-GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUT
-	GPIOBDE |&#x3D; BIT(3); &#x2F;&#x2
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/3.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</div>
-                            <div class="description center-align">
-                                
-                                    56A进入CBT模式：&amp;emsp;&amp;emsp;配置工具默认是这样的：
-&amp;emsp;&amp;emsp;配置工具只支持5击进入CBT模式。客户需求是3击，进入CBT模式后蓝灯500ms周期闪烁下面是实现过程。
-&amp
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/7.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯AB5325A音箱回连慢解决方法</div>
-                            <div class="description center-align">
-                                
-                                    SDK版本：AB532X_S9170
-解决方法：
-未回连的状态下，在程序中调用回连函数程序处理：在1秒调用消息中添加判断，是否有回连信息bt_nor_get_link_info(NULL)和蓝牙是否处于配对状态!(bt_nor_is_con
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/6.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯--AB536X系列PWM的使用</div>
-                            <div class="description center-align">
-                                
-                                    AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/15.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯系列蓝牙IC编译工具安装</div>
-                            <div class="description center-align">
-                                
-                                    1.2.1	安装codeblocks文件夹01-tools\02-compile\编译环境下找到codeblocks-17.12-setup.exe双击即可安装。或下载文末资源找到codeblocks-17.12-setup.exeNext
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/14.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯--AB532X系列TWS的接口调用</div>
-                            <div class="description center-align">
-                                
-                                    TWS的按键操作：长按mode按键TWS配对，长按连接手机&#x2F;回连手机
-if(xcfg_cb.bt_tws_en &amp;&amp; xcfg_cb.bt_tws_pair_mode &#x3D;&#x3D; 2)&#123;
-	
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/0.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯系列IC下载工具安装及介绍</div>
-                            <div class="description center-align">
-                                
-                                    &amp;emsp;&amp;emsp;蓝讯的开发工具很齐全，图像化编程界面对开发者十分友好，蓝牙耳机的功能大部分可以通过图形化编程工具完成，开发效率极高。开发蓝讯系列蓝牙方案主要的开发工具有蓝讯的烧写工具Downloader，编译工具co
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/10.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯--AB532X系列PWM的使用</div>
-                            <div class="description center-align">
-                                
-                                    &amp;emsp;&amp;emsp;解决音箱开机噗噗声，功放IC为LTK5128  2018和8871。都是1脚低开高秒，3脚AB类&#x2F;D类转换，其他模式高电平
-&amp;emsp;&amp;emsp;在初始化后，mute功放和
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/myblog/medias/featureimages/10.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">中科蓝讯蓝牙耳机SDK解析</div>
-                            <div class="description center-align">
-                                
-                                    SDK结构1.1	SDK目录结构└─app
-    ├─platform       
-    │  ├─bsp       				&#x2F;&#x2F;底层外设相关
-    │  ├─functions   			&#x2F;&#x2
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BASDK%E8%A7%A3%E6%9E%90/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-    
-</div>
-
-<script>
-    $(function () {
-        let coverSlider = $('.carousel');
-
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
-
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'true' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-        let carouselIntervalId;
-        
-        // Loop to call the next cover article picture.
-        let autoCarousel = function () {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-        function restartPlay() {
-            
-            clearInterval(carouselIntervalId);
-            autoCarousel();
-            
-        };
-
-        
-        // prev and next cover post.
-        $('#prev-cover').click(function () {
-            coverSlider.carousel('prev');
-            restartPlay();
-        });
-        $('#next-cover').click(function () {
-            coverSlider.carousel('next');
-            restartPlay();
-        });
-        
-    });
-</script>
-
-
-
-<main class="content">
-
-    
-    <div id="indexCard" class="index-card">
-        <div class="container ">
-            <div class="card">
-                <div class="card-content">
-                    
-                        <div class="dream">
-    
-    <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
-    </div>
-    
-    <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
-        </div>
-    </div>
-</div>
-
-                    
-
-                    
-
-                    
-
-                    
-                    <div id="recommend-sections" class="recommend">
-                        
-
-
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    
-
-    <!-- 所有文章卡片 -->
-    <article id="articles" class="container articles">
-        <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/10.jpg" class="responsive-img" alt="中科蓝汛--AB5335系列蓝牙信号超出距离的处理">
-                            
-                            <span class="card-title">中科蓝汛--AB5335系列蓝牙信号超出距离的处理</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1.超出距离的消息处理会执行到下面这个函数的消息处理
-void bt_emit_notice(uint evt, u32 param)
-
-
-case BT_NOTICE_LOSTCONNECT:
-        connect_lost_f
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/AB5335/">
-                            <span class="chip bg-color">AB5335</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/%E8%93%9D%E7%89%99%E8%B7%9D%E7%A6%BB/">
-                            <span class="chip bg-color">蓝牙距离</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/15.jpg" class="responsive-img" alt="中科蓝讯系列蓝牙IC编译工具安装">
-                            
-                            <span class="card-title">中科蓝讯系列蓝牙IC编译工具安装</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1.2.1	安装codeblocks文件夹01-tools\02-compile\编译环境下找到codeblocks-17.12-setup.exe双击即可安装。或下载文末资源找到codeblocks-17.12-setup.exeNext
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/codeblocks/">
-                            <span class="chip bg-color">codeblocks</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/RV32-Toolchain-Setup/">
-                            <span class="chip bg-color">RV32-Toolchain-Setup</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/0.jpg" class="responsive-img" alt="中科蓝讯系列IC下载工具安装及介绍">
-                            
-                            <span class="card-title">中科蓝讯系列IC下载工具安装及介绍</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                &amp;emsp;&amp;emsp;蓝讯的开发工具很齐全，图像化编程界面对开发者十分友好，蓝牙耳机的功能大部分可以通过图形化编程工具完成，开发效率极高。开发蓝讯系列蓝牙方案主要的开发工具有蓝讯的烧写工具Downloader，编译工具co
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/">
-                            <span class="chip bg-color">蓝讯开发基础</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/10.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列PWM的使用">
-                            
-                            <span class="card-title">中科蓝讯--AB532X系列PWM的使用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                &amp;emsp;&amp;emsp;解决音箱开机噗噗声，功放IC为LTK5128  2018和8871。都是1脚低开高秒，3脚AB类&#x2F;D类转换，其他模式高电平
-&amp;emsp;&amp;emsp;在初始化后，mute功放和
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/%E5%8A%9F%E6%94%BE/">
-                            <span class="chip bg-color">功放</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/3.jpg" class="responsive-img" alt="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式">
-                            
-                            <span class="card-title">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                56A进入CBT模式：&amp;emsp;&amp;emsp;配置工具默认是这样的：
-&amp;emsp;&amp;emsp;配置工具只支持5击进入CBT模式。客户需求是3击，进入CBT模式后蓝灯500ms周期闪烁下面是实现过程。
-&amp
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/AB537X/">
-                            <span class="chip bg-color">AB537X</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/CBT/">
-                            <span class="chip bg-color">CBT</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BASDK%E8%A7%A3%E6%9E%90/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/10.jpg" class="responsive-img" alt="中科蓝讯蓝牙耳机SDK解析">
-                            
-                            <span class="card-title">中科蓝讯蓝牙耳机SDK解析</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                SDK结构1.1	SDK目录结构└─app
-    ├─platform       
-    │  ├─bsp       				&#x2F;&#x2F;底层外设相关
-    │  ├─functions   			&#x2F;&#x2
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/%E8%93%9D%E8%AE%AF%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">蓝讯教程</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/SDK/">
-                            <span class="chip bg-color">SDK</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/7.jpg" class="responsive-img" alt="中科蓝讯AB5325A音箱回连慢解决方法">
-                            
-                            <span class="card-title">中科蓝讯AB5325A音箱回连慢解决方法</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                SDK版本：AB532X_S9170
-解决方法：
-未回连的状态下，在程序中调用回连函数程序处理：在1秒调用消息中添加判断，是否有回连信息bt_nor_get_link_info(NULL)和蓝牙是否处于配对状态!(bt_nor_is_con
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/%E5%9B%9E%E8%BF%9E/">
-                            <span class="chip bg-color">回连</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/532x/">
-                            <span class="chip bg-color">532x</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/6.jpg" class="responsive-img" alt="中科蓝讯--AB536X系列PWM的使用">
-                            
-                            <span class="card-title">中科蓝讯--AB536X系列PWM的使用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/PWM/">
-                            <span class="chip bg-color">PWM</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/536X/">
-                            <span class="chip bg-color">536X</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/10.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列PWM的使用">
-                            
-                            <span class="card-title">中科蓝讯--AB532X系列PWM的使用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                实例：
-PB3实现呼吸灯
-
-初始化在pwm_port_init函数下
-GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUT
-	GPIOBDE |&#x3D; BIT(3); &#x2F;&#x2
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/PWM/">
-                            <span class="chip bg-color">PWM</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/532X/">
-                            <span class="chip bg-color">532X</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/myblog/medias/featureimages/14.jpg" class="responsive-img" alt="中科蓝讯--AB532X系列TWS的接口调用">
-                            
-                            <span class="card-title">中科蓝讯--AB532X系列TWS的接口调用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                TWS的按键操作：长按mode按键TWS配对，长按连接手机&#x2F;回连手机
-if(xcfg_cb.bt_tws_en &amp;&amp; xcfg_cb.bt_tws_pair_mode &#x3D;&#x3D; 2)&#123;
-	
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    蓝讯开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/myblog/tags/532X/">
-                            <span class="chip bg-color">532X</span>
-                        </a>
-                        
-                        <a href="/myblog/tags/TWS/">
-                            <span class="chip bg-color">TWS</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-        </div>
-    </article>
-
-</main>
-
-
-<div class="container paging">
-    <div class="row">
-        <div class="col s6 m4 l4">
-            
-            <a class="left btn-floating btn-large disabled">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            
-        </div>
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 2</div>
-        </div>
-        <div class="col s6 m4 l4">
-            
-            <a href="/myblog/page/2/"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-right"></i>
-            </a>
-            
-        </div>
-    </div>
-</div>
-
-
-
-
-    <footer class="page-footer bg-color">
-    
-        <link rel="stylesheet" href="/myblog/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
     }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/myblog/libs/aplayer/APlayer.min.js"></script>
-<script src="/myblog/libs/aplayer/Meting.min.js"></script>
-
-    
-
-    <div class="container row center-align"
-         style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2022</span>
-            
-            <a href="/myblog/about" target="_blank">JSmcu</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            
-            
-                
-            
-            
-                <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
-            </span>
-            
-            <br>
-
-            <!-- 运行天数提醒. -->
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-
-
-    <a href="mailto:kefu2132@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2142686503" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2142686503" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-    <a href="https://www.zhihu.com/people/jsmcu" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/jsmcu" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
-    </a>
-
-
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/myblog/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/myblog/libs/materialize/materialize.min.js"></script>
-    <script src="/myblog/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/myblog/libs/aos/aos.js"></script>
-    <script src="/myblog/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/myblog/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/myblog/js/matery.js"></script>
-
-    
-
-    
-
-    <!-- 雪花特效 -->
-    
-
-    <!-- 鼠标星星特效 -->
-     
-        <script type="text/javascript">
-            // 只在桌面版网页启用特效
-            var windowWidth = $(window).width();
-            if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/myblog/libs/others/star.js"><\/script>');
-            }
-        </script>
-    
-
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/myblog/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
-    
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
         } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          document.documentElement.classList.remove('hide-aside')
         }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/myblog/atom.xml" title="JS" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/myblog/">JS</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">JS</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/" title="中科蓝汛--AB5335系列蓝牙信号超出距离的处理"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝汛--AB5335系列蓝牙信号超出距离的处理"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/" title="中科蓝汛--AB5335系列蓝牙信号超出距离的处理">中科蓝汛--AB5335系列蓝牙信号超出距离的处理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:20:37.708Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">1.超出距离的消息处理会执行到下面这个函数的消息处理
+void bt_emit_notice(uint evt, u32 param)
 
-    
-    <script src="/myblog/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="/myblog/libs/others/busuanzi.pure.mini.js"></script>
-    
 
-    
+case BT_NOTICE_LOSTCONNECT:
+        connect_lost_flag &#x3D; 1;
+        piano_res_play(T_WARNING_NEXT_TRACK, 3);    &#x2F;&#x2F;“滴”一声
+        break;
 
-    
+2.超出距离重新连接会执行void func_bt_disp_status(void)
+switch (f_bt.disp_status) &#123;
+      ......
+        case BT_STA_CONNECTED:
+           connect_lost_flag &#x3D; 0;
+           led_bt_connected();
+           break;
+       ......
+3.在定时器处理蓝牙超出距离的灯闪usr_tmr5ms_isr
+if ((cnt_5ms % 20) &#x3D; ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" title="中科蓝讯系列蓝牙IC编译工具安装"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯系列蓝牙IC编译工具安装"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" title="中科蓝讯系列蓝牙IC编译工具安装">中科蓝讯系列蓝牙IC编译工具安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:20:37.705Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">1.2.1	安装codeblocks文件夹01-tools\02-compile\编译环境下找到codeblocks-17.12-setup.exe双击即可安装。或下载文末资源找到codeblocks-17.12-setup.exeNext
+I Agree
+默认选项-next
 
-    <!--腾讯兔小巢-->
-    
-    
+默认选项 – Install
 
-    
+安装中
+安装后选完成到这就完成了编译工具的安装，先别打开编译工具，想要编译程序还需要安装编译链。
+1.2.2	安装编译链
+01-tools\02-compile\编译环境\RV32-Toolchain-Setup_v0.8.0
+&amp;emsp;&amp;emsp;双击安装&amp;emsp;&amp;emsp;默认选项–下一步
+&amp;emsp;&amp;emsp;安装中，安装完成后选finish。
+1.2.3	使用编译工具&amp;emsp;&amp;emsp;打开安装好的code block，把SDK_AB537X_S103_20191031\app\projects\earphone路径下的app.cbp文件拉进去。
+&amp;emsp;&amp;emsp;编译
+&a ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/" title="中科蓝讯系列IC下载工具安装及介绍"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯系列IC下载工具安装及介绍"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/" title="中科蓝讯系列IC下载工具安装及介绍">中科蓝讯系列IC下载工具安装及介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:20:37.701Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">&amp;emsp;&amp;emsp;蓝讯的开发工具很齐全，图像化编程界面对开发者十分友好，蓝牙耳机的功能大部分可以通过图形化编程工具完成，开发效率极高。开发蓝讯系列蓝牙方案主要的开发工具有蓝讯的烧写工具Downloader，编译工具codeblock，编辑器source insight等&amp;emsp;&amp;emsp;下面讲的是下载工具的安装。
+1.1	烧写工具Downloader的安装文件夹Downloader_v1.2.3直接双击Downloader.exe安装。可能会出现下面的提示。
+1.1.2	安装：.NET Franmework 3.5点击下载安装此功能下载界面如下：
+等待下载
+下载完自动安装
+1.1.3	安装完成
+1.1.4	打开下载工具安装后双击Downloader.exe即可以打开
+1.1.5	download工具介绍先打开一个工程，以最新的76A开发包为例。打开目录AB537x\SDK_AB537X_S103_20191031\app\projects\earphone\Output\bin把app.dcf文件拖进下载工具。
+以上需要用到的工具的是：
+1. ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/" title="中科蓝讯--AB532X系列PWM的使用"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯--AB532X系列PWM的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/" title="中科蓝讯--AB532X系列PWM的使用">中科蓝讯--AB532X系列PWM的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:20:37.698Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">&amp;emsp;&amp;emsp;解决音箱开机噗噗声，功放IC为LTK5128  2018和8871。都是1脚低开高秒，3脚AB类&#x2F;D类转换，其他模式高电平
+&amp;emsp;&amp;emsp;在初始化后，mute功放和切换AB类。
+LOUDSPEAKER_MUTE_INIT();
+AMPLIFIER_SEL_INIT();
 
-    
+LOUDSPEAKER_MUTE();
+AMPLIFIER_SEL_AB();
+在播报提示音之前恢复正常
+ LOUDSPEAKER_UNMUTE();
+    AMPLIFIER_SEL_D();
+    delay_5ms(2);
 
-    
-    <script src="/myblog/libs/instantpage/instantpage.js" type="module"></script>
-    
+#if WARNING_POWER_ON
+    mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);
+#endif &#x2F;&#x2F; WARNING_POWER_ON
 
-</body>
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/" title="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/" title="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:20:37.695Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">56A进入CBT模式：&amp;emsp;&amp;emsp;配置工具默认是这样的：
+&amp;emsp;&amp;emsp;配置工具只支持5击进入CBT模式。客户需求是3击，进入CBT模式后蓝灯500ms周期闪烁下面是实现过程。
+&amp;emsp;&amp;emsp;在消息处理msg_bt.c中添加三击处理
+case KTH_PLAY_PWR_USER_DEF:    &#x2F;&#x2F;&#x2F;三击进CBT测试模式
+&#x2F;&#x2F;        printf(&quot;KTH_PLAY_PWR_USER_DEF\n&quot;);
+        &#x2F;&#x2F;led_set_sta(0x00,0xaa,10,0);
+        led_on();
+        if (!bt_nor_is_connected()) &#123;
+            printf(&quot;FUNC_BT_CBT\n&quot;);
+            if(xcfg_cb.bb_cbt_test_en &#x3D;&#x3D; 0)
+        ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BASDK%E8%A7%A3%E6%9E%90/" title="中科蓝讯蓝牙耳机SDK解析"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯蓝牙耳机SDK解析"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BASDK%E8%A7%A3%E6%9E%90/" title="中科蓝讯蓝牙耳机SDK解析">中科蓝讯蓝牙耳机SDK解析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:12:18.432Z" title="发表于 2022-07-19 00:12:18">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">SDK结构1.1	SDK目录结构└─app
+    ├─platform       
+    │  ├─bsp       				&#x2F;&#x2F;底层外设相关
+    │  ├─functions   			&#x2F;&#x2F;功能相关
+    │  ├─gui        				&#x2F;&#x2F;显示功能
+    │  ├─header
+    │  └─libs
+    └─projects						&#x2F;&#x2F;调用API
+        └─earphone
+            ├─display   			&#x2F;&#x2F;显示
+            ├─message  			&#x2F;&#x2F;消息处理
+            ├─Output   			&#x2F;&#x2F;文件输出
+            │  └─bin   			&#x2F;&#x2F;音乐文件，配置
+            │      ├─res
+            │      │  ├─en
+            │       ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="中科蓝讯AB5325A音箱回连慢解决方法"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯AB5325A音箱回连慢解决方法"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB5325A%E9%9F%B3%E7%AE%B1%E5%9B%9E%E8%BF%9E%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="中科蓝讯AB5325A音箱回连慢解决方法">中科蓝讯AB5325A音箱回连慢解决方法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:12:18.416Z" title="发表于 2022-07-19 00:12:18">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">SDK版本：AB532X_S9170
+解决方法：
+未回连的状态下，在程序中调用回连函数程序处理：在1秒调用消息中添加判断，是否有回连信息bt_nor_get_link_info(NULL)和蓝牙是否处于配对状态!(bt_nor_is_connected())。两者都满足则调用一次回连函数。直到回连上设备。
+  case MSG_SYS_1S:
+      bt_send_msg(BT_MSG_HFP_REPORT_BAT);
+if(bt_nor_get_link_info(NULL) &amp;&amp; !(bt_nor_is_connected()) )&#123;
+	bt_connect();
+&#125;
+      break;
 
-</html>
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="中科蓝讯--AB536X系列PWM的使用"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯--AB536X系列PWM的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB536X%E7%B3%BB%E5%88%97%E8%8A%AF%E7%89%87PWM%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="中科蓝讯--AB536X系列PWM的使用">中科蓝讯--AB536X系列PWM的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:12:18.414Z" title="发表于 2022-07-19 00:12:18">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">AB536X 支持 3 个定时器（Timer3,Timer4,Timer5,）PWM 输出，每个定时器支持 3 路 PWM 输出 ，分别是 PWM0 ，PWM1，PWM2，其中每个定时器支持 3 路周期相同，可设置不同占空比的 PWM 同时输出。 AB536X 每组 timer定时器 对应 PWM IO 说明：Timer3:
+G1: PWM0-&gt;PB0  PWM1-&gt;PB1  PWM2-&gt;PB2
+G2: PWM0-&gt;PB3  PWM1-&gt;PB4  PWM2-&gt;PB5
+G3: PWM0-&gt;PF2  PWM1-&gt;PA3  PWM2-&gt;PA4
+G4: PWM0-&gt;PE0
+Timer4:
+G1: PWM0-&gt;PE5  PWM1-&gt;PE6  PWM2-&gt;PE7
+G2:  		    PWM1-&gt;PF1  PWM2-&gt;PF1
+
+Timer5:
+G1: PWM0-&gt;PA5  PWM1-&gt;PA6  PWM2-&gt;PA7
+
+FUNCMCON2 对应 PWM 的映射：timer3-&gt;8Bit   ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/" title="中科蓝讯--AB532X系列PWM的使用"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯--AB532X系列PWM的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/" title="中科蓝讯--AB532X系列PWM的使用">中科蓝讯--AB532X系列PWM的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:12:18.409Z" title="发表于 2022-07-19 00:12:18">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">实例：
+PB3实现呼吸灯
+
+初始化在pwm_port_init函数下
+GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUT
+	GPIOBDE |&#x3D; BIT(3); &#x2F;&#x2F;数字 IO 口要设置上.
+	GPIOBFEN |&#x3D; BIT(3); &#x2F;&#x2F;function io enable
+	FUNCMCON2 &#x3D; (2 &lt;&lt; 8); &#x2F;&#x2F; TIMER3的G2   pwm map to G1 (PE1&#x2F;2&#x2F;3)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8Bit
+	TMR3CON &#x3D; 0x00; &#x2F;&#x2F;时钟源默认为系统时钟 24M
+	TMR3CNT &#x3D; 0;
+	TMR3PR &#x3D; 1000; &#x2F;&#x2F;例如为 24M 时, 频率为 24M&#x2F;(12000*4) &#x3D; 500HZ, 即周期为0.002S. &#x2F ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/" title="中科蓝讯--AB532X系列TWS的接口调用"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯--AB532X系列TWS的接口调用"></a></div><div class="recent-post-info"><a class="article-title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AFAB532X%E7%B3%BB%E5%88%97TWS%E7%9A%84%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/" title="中科蓝讯--AB532X系列TWS的接口调用">中科蓝讯--AB532X系列TWS的接口调用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-07-18T16:03:50.557Z" title="发表于 2022-07-19 00:03:50">2022-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/">蓝讯开发</a></span></div><div class="content">TWS的按键操作：长按mode按键TWS配对，长按连接手机&#x2F;回连手机
+if(xcfg_cb.bt_tws_en &amp;&amp; xcfg_cb.bt_tws_pair_mode &#x3D;&#x3D; 2)&#123;
+	if(bt_tws_is_connected()) &#123;
+		
+	&#125; else &#123;
+		bt_tws_search_slave();
+		printf(&quot;bt_tws_search_slave\n&quot;);
+	&#125;
+&#125;
+if(bt_nor_is_connected())&#123;&#x2F;&#x2F;手机已经连接
+	printf(&quot;disconnect with boletooth\n&quot;);
+	bsp_clr_mute_sta();
+	bt_nor_disconnect();&#x2F;&#x2F;M键断开手机蓝牙.或者bt_disconnect()
+    
+&#125;else&#123;
+	printf(&quot;connect with boletooth ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/myblog/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/myblog/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/myblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JSmcu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/myblog/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/myblog/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/myblog/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/" title="中科蓝汛--AB5335系列蓝牙信号超出距离的处理"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝汛--AB5335系列蓝牙信号超出距离的处理"/></a><div class="content"><a class="title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B--AB5335%E7%B3%BB%E5%88%97%20%E8%93%9D%E7%89%99%E4%BF%A1%E5%8F%B7%E8%B6%85%E5%87%BA%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%A4%84%E7%90%86/" title="中科蓝汛--AB5335系列蓝牙信号超出距离的处理">中科蓝汛--AB5335系列蓝牙信号超出距离的处理</a><time datetime="2022-07-18T16:20:37.708Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" title="中科蓝讯系列蓝牙IC编译工具安装"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯系列蓝牙IC编译工具安装"/></a><div class="content"><a class="title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97%E8%93%9D%E7%89%99IC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/" title="中科蓝讯系列蓝牙IC编译工具安装">中科蓝讯系列蓝牙IC编译工具安装</a><time datetime="2022-07-18T16:20:37.705Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/" title="中科蓝讯系列IC下载工具安装及介绍"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯系列IC下载工具安装及介绍"/></a><div class="content"><a class="title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E7%B3%BB%E5%88%97IC%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BB%8B%E7%BB%8D/" title="中科蓝讯系列IC下载工具安装及介绍">中科蓝讯系列IC下载工具安装及介绍</a><time datetime="2022-07-18T16:20:37.701Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/" title="中科蓝讯--AB532X系列PWM的使用"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯--AB532X系列PWM的使用"/></a><div class="content"><a class="title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF%E8%93%9D%E7%89%99%E6%96%B9%E6%A1%88%E5%BC%80%E5%8F%91%E8%A7%A3%E5%86%B3%E9%9F%B3%E7%AE%B1%E5%BC%80%E6%9C%BA%E5%99%97%E5%99%97%E5%A3%B0/" title="中科蓝讯--AB532X系列PWM的使用">中科蓝讯--AB532X系列PWM的使用</a><time datetime="2022-07-18T16:20:37.698Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/" title="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/myblog/img/404.jpg'" alt="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式"/></a><div class="content"><a class="title" href="/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E6%B1%9B%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%E8%BF%9B%E5%85%A5CBT%E6%A8%A1%E5%BC%8F/" title="中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式">中科蓝讯蓝牙耳机AB5356A_AB5376A进入CBT模式</a><time datetime="2022-07-18T16:20:37.695Z" title="发表于 2022-07-19 00:20:37">2022-07-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">蓝讯开发</span><span class="card-category-list-count">10</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/myblog/tags/532X/" style="font-size: 1.5em; color: #99a9bf">532X</a> <a href="/myblog/tags/532x/" style="font-size: 1.1em; color: #999">532x</a> <a href="/myblog/tags/536X/" style="font-size: 1.1em; color: #999">536X</a> <a href="/myblog/tags/AB5335/" style="font-size: 1.1em; color: #999">AB5335</a> <a href="/myblog/tags/AB537X/" style="font-size: 1.1em; color: #999">AB537X</a> <a href="/myblog/tags/CBT/" style="font-size: 1.1em; color: #999">CBT</a> <a href="/myblog/tags/PWM/" style="font-size: 1.5em; color: #99a9bf">PWM</a> <a href="/myblog/tags/RV32-Toolchain-Setup/" style="font-size: 1.1em; color: #999">RV32-Toolchain-Setup</a> <a href="/myblog/tags/SDK/" style="font-size: 1.1em; color: #999">SDK</a> <a href="/myblog/tags/TWS/" style="font-size: 1.1em; color: #999">TWS</a> <a href="/myblog/tags/codeblocks/" style="font-size: 1.1em; color: #999">codeblocks</a> <a href="/myblog/tags/%E5%8A%9F%E6%94%BE/" style="font-size: 1.1em; color: #999">功放</a> <a href="/myblog/tags/%E5%9B%9E%E8%BF%9E/" style="font-size: 1.1em; color: #999">回连</a> <a href="/myblog/tags/%E8%93%9D%E7%89%99%E8%B7%9D%E7%A6%BB/" style="font-size: 1.1em; color: #999">蓝牙距离</a> <a href="/myblog/tags/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/" style="font-size: 1.1em; color: #999">蓝讯开发基础</a> <a href="/myblog/tags/%E8%93%9D%E8%AE%AF%E6%95%99%E7%A8%8B/" style="font-size: 1.1em; color: #999">蓝讯教程</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/myblog/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><span class="card-archive-list-count">11</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">11</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-07-20T14:50:21.547Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By JSmcu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/myblog/js/utils.js"></script><script src="/myblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
