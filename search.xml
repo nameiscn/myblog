@@ -31,6 +31,33 @@
     
     
     <entry>
+      <title>中科蓝讯系列蓝牙IC编译工具安装</title>
+      <link href="/myblog/2022/07/24/03%20software/"/>
+      <url>/myblog/2022/07/24/03%20software/</url>
+      
+        <content type="html"><![CDATA[<p>1.2.1安装codeblocks<br>文件夹01-tools\02-compile\编译环境下找到codeblocks-17.12-setup.exe<br>双击即可安装。<br>或下载文末资源找到codeblocks-17.12-setup.exe<br><img src="https://img-blog.csdnimg.cn/20191213001124301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Next</p><p><img src="https://img-blog.csdnimg.cn/20191213001144439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>I Agree</p><p><img src="https://img-blog.csdnimg.cn/20191213001154771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>默认选项-next</p><p><img src="https://img-blog.csdnimg.cn/20191213001210364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>默认选项 – Install</p><p><img src="https://img-blog.csdnimg.cn/20191213001224901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>安装中<br><img src="https://img-blog.csdnimg.cn/20191213001237455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h5 id="安装后选完成"><a href="#安装后选完成" class="headerlink" title="安装后选完成"></a>安装后选完成</h5><p>到这就完成了编译工具的安装，先别打开编译工具，想要编译程序还需要安装编译链。</p><p>1.2.2安装编译链</p><p>01-tools\02-compile\编译环境\RV32-Toolchain-Setup_v0.8.0</p><p>&amp;emsp;&amp;emsp;双击安装<br><img src="https://img-blog.csdnimg.cn/20191213001315319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>&amp;emsp;&amp;emsp;默认选项–下一步<br><img src="https://img-blog.csdnimg.cn/20191213001432418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;安装中，安装完成后选finish。</p><p>1.2.3使用编译工具<br>&amp;emsp;&amp;emsp;打开安装好的code block，把SDK_AB537X_S103_20191031\app\projects\earphone路径下的app.cbp文件拉进去。</p><p><img src="https://img-blog.csdnimg.cn/2019121300152489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>&amp;emsp;&amp;emsp;编译<br><img src="https://img-blog.csdnimg.cn/20191213001532601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;编译成功<br><img src="https://img-blog.csdnimg.cn/20191213001549254.png" alt="在这里插入图片描述"></p><p>&amp;emsp;&amp;emsp;至此，已经可以正式编译烧写代码了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 蓝讯开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> codeblocks </tag>
+            
+            <tag> RV32-Toolchain-Setup </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AB532X系列TWS的接口调用</title>
       <link href="/myblog/2022/07/24/01-AB532X%20TWS/"/>
       <url>/myblog/2022/07/24/01-AB532X%20TWS/</url>
@@ -47,9 +74,9 @@
       
         <tags>
             
-            <tag> 532X </tag>
-            
             <tag> TWS </tag>
+            
+            <tag> 532X </tag>
             
         </tags>
       
@@ -74,9 +101,9 @@
       
         <tags>
             
-            <tag> PWM </tag>
-            
             <tag> 532X </tag>
+            
+            <tag> PWM </tag>
             
         </tags>
       
