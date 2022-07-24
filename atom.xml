@@ -6,7 +6,7 @@
   <link href="https://nameiscn.github.io/myblog/atom.xml" rel="self"/>
   
   <link href="https://nameiscn.github.io/myblog/"/>
-  <updated>2022-07-20T17:28:18.732Z</updated>
+  <updated>2022-07-24T03:22:49.279Z</updated>
   <id>https://nameiscn.github.io/myblog/</id>
   
   <author>
@@ -17,15 +17,55 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>My New Post</title>
-    <link href="https://nameiscn.github.io/myblog/2022/07/21/My-New-Post/"/>
-    <id>https://nameiscn.github.io/myblog/2022/07/21/My-New-Post/</id>
-    <published>2022-07-20T17:28:18.000Z</published>
-    <updated>2022-07-20T17:28:18.732Z</updated>
+    <title>蓝牙耳机进入CBT模式</title>
+    <link href="https://nameiscn.github.io/myblog/2022/07/24/02%20%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%20CBT%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://nameiscn.github.io/myblog/2022/07/24/02%20%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BAAB5356A_AB5376A%20CBT%E6%A8%A1%E5%BC%8F/</id>
+    <published>2022-07-24T03:18:37.000Z</published>
+    <updated>2022-07-24T03:22:49.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>56A进入CBT模式：<br> 配置工具默认是这样的：<br><img src="https://img-blog.csdnimg.cn/20191018002251728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODYwOTg2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p> 配置工具只支持5击进入CBT模式。客户需求是3击，进入CBT模式后蓝灯500ms周期闪烁下面是实现过程。</p><p> 在消息处理msg_bt.c中添加三击处理</p><pre class="language-none"><code class="language-none">case KTH_PLAY_PWR_USER_DEF:    &#x2F;&#x2F;&#x2F;三击进CBT测试模式&#x2F;&#x2F;        printf(&quot;KTH_PLAY_PWR_USER_DEF\n&quot;);        &#x2F;&#x2F;led_set_sta(0x00,0xaa,10,0);        led_on();        if (!bt_nor_is_connected()) &#123;            printf(&quot;FUNC_BT_CBT\n&quot;);            if(xcfg_cb.bb_cbt_test_en &#x3D;&#x3D; 0)            &#123;                xcfg_cb.bb_cbt_test_en &#x3D; 1;                led_set_sta(0x00, 0xaa, 5, 0);                          &#x2F;&#x2F;蓝灯500ms周期闪烁，                bt_cfg.cbt_test_mode &#x3D; xcfg_cb.bb_cbt_test_en;            &#125;        &#125;        break;</code></pre><p> led_set_sta函数使用方法：</p><pre class="language-none"><code class="language-none">void led_set_sta(u8 rled_sta, u8 bled_sta, u8 uint, u8 period);led_set_sta(0x00, 0xaa, 5, 0); </code></pre><p> rled_sta红灯的状态，对应配置工具的红灯点<br> bled_sta蓝灯的状态，对应配置工具的蓝灯点</p><p><img src="https://img-blog.csdnimg.cn/20191018002546230.png" alt="在这里插入图片描述"></p><p> uint表示一个单位时间&#x3D;uint*50ms<br> period表示闪灯周期</p><p> led_set_sta(0x00, 0xaa, 5, 0);<br> 相当于<br><img src="https://img-blog.csdnimg.cn/20191018002613556.png" alt="在这里插入图片描述"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;56A进入CBT模式：&lt;br&gt; 配置工具默认是这样的：&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20191018002251728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5</summary>
+      
     
     
     
+    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
     
+    
+    <category term="CBT" scheme="https://nameiscn.github.io/myblog/tags/CBT/"/>
+    
+    <category term="耳机" scheme="https://nameiscn.github.io/myblog/tags/%E8%80%B3%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AB532X系列TWS的接口调用</title>
+    <link href="https://nameiscn.github.io/myblog/2022/07/24/01-AB532X%20TWS/"/>
+    <id>https://nameiscn.github.io/myblog/2022/07/24/01-AB532X%20TWS/</id>
+    <published>2022-07-23T16:09:37.000Z</published>
+    <updated>2022-07-23T16:24:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>TWS的按键操作：<br>长按mode按键TWS配对，长按连接手机&#x2F;回连手机</p><pre class="language-none"><code class="language-none">if(xcfg_cb.bt_tws_en &amp;&amp; xcfg_cb.bt_tws_pair_mode &#x3D;&#x3D; 2)&#123;if(bt_tws_is_connected()) &#123;&#125; else &#123;bt_tws_search_slave();printf(&quot;bt_tws_search_slave\n&quot;);&#125;&#125;if(bt_nor_is_connected())&#123;&#x2F;&#x2F;手机已经连接printf(&quot;disconnect with boletooth\n&quot;);bsp_clr_mute_sta();bt_nor_disconnect();&#x2F;&#x2F;M键断开手机蓝牙.或者bt_disconnect()    &#125;else&#123;printf(&quot;connect with boletooth\n&quot;);bt_connect();&#x2F;&#x2F;bt_nor_connect();&#x2F;&#x2F;M键回连手机蓝牙&#125;</code></pre><pre class="language-none"><code class="language-none">if(left_warning) &#123; &#x2F;&#x2F;left channel       &#x2F;&#x2F;slave            func_cb.mp3_res_play(RES_BUF_LEFT_CH_MP3, RES_LEN_LEFT_CH_MP3);printf(&quot;         slave   slave            \n&quot;);    get_tws_chanl&#x3D;2;&#x2F;&#x2F;副机等于2        &#125;        if(right_warning) &#123;  &#x2F;&#x2F;right channel      &#x2F;&#x2F;master            delay_5ms(200);            func_cb.mp3_res_play(RES_BUF_RIGHT_CH_MP3, RES_LEN_RIGHT_CH_MP3);    printf(&quot;         master   master            \n&quot;);get_tws_chanl&#x3D;1;&#x2F;&#x2F;主机等于1        &#125;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;TWS的按键操作：&lt;br&gt;长按mode按键TWS配对，长按连接手机&amp;#x2F;回连手机&lt;/p&gt;
+&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;if(xcfg_cb.bt_tws_en &amp;amp;&amp;amp; xc</summary>
+      
+    
+    
+    
+    <category term="蓝讯开发" scheme="https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="532X" scheme="https://nameiscn.github.io/myblog/tags/532X/"/>
+    
+    <category term="TWS" scheme="https://nameiscn.github.io/myblog/tags/TWS/"/>
     
   </entry>
   
@@ -34,7 +74,7 @@
     <link href="https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>https://nameiscn.github.io/myblog/2022/07/19/%E4%B8%AD%E7%A7%91%E8%93%9D%E8%AE%AF532X%E7%B3%BB%E5%88%97PWM%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
     <published>2022-07-18T16:24:37.000Z</published>
-    <updated>2022-07-20T15:33:07.134Z</updated>
+    <updated>2022-07-23T16:15:28.246Z</updated>
     
     <content type="html"><![CDATA[<pre class="language-none"><code class="language-none">实例：PB3实现呼吸灯</code></pre><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>在pwm_port_init函数下</p><pre class="language-none"><code class="language-none">GPIOBDIR &amp;&#x3D; ~BIT(3); &#x2F;&#x2F;DIR OUTGPIOBDE |&#x3D; BIT(3); &#x2F;&#x2F;数字 IO 口要设置上.GPIOBFEN |&#x3D; BIT(3); &#x2F;&#x2F;function io enableFUNCMCON2 &#x3D; (2 &lt;&lt; 8); &#x2F;&#x2F; TIMER3的G2   pwm map to G1 (PE1&#x2F;2&#x2F;3)timer5-&gt;16Bit timer4-&gt;12Bit timer3-&gt;8BitTMR3CON &#x3D; 0x00; &#x2F;&#x2F;时钟源默认为系统时钟 24MTMR3CNT &#x3D; 0;TMR3PR &#x3D; 1000; &#x2F;&#x2F;例如为 24M 时, 频率为 24M&#x2F;(12000*4) &#x3D; 500HZ, 即周期为0.002S. &#x2F;&#x2F;U32&#x2F;&#x2F;TMR3DUTY0 &#x3D; 12000 - 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;25% 负占空比 PE1 &#x2F;&#x2F;注意 PR &gt;&#x3D; DUTY &#x2F;&#x2F;DUTY &#x3D;&#x3D;PR, 全高. -1 (也就是 0xFFFF)时, 全低, 其他值表示&quot;负占空比&quot;TMR3DUTY1 &#x3D; 1000-1; &#x2F;&#x2F;u16 &#x2F;&#x2F;50% 负占空比 PB2&#x2F;&#x2F;TMR3DUTY2 &#x3D; 12000*3- 1; &#x2F;&#x2F;u16 &#x2F;&#x2F;75% 负占空比 PE3TMR3CON |&#x3D; BIT(10); &#x2F;&#x2F;timer5 pwm0, pwm1, pwm2 enableTMR3CON |&#x3D; BIT(0); &#x2F;&#x2F;Timer enable (defualt work in counter mode)</code></pre><p>注意：<br>如果是在port_pwm.c下写的初始化函数。<br>打开这个宏，不然程序不会执行</p><pre class="language-none"><code class="language-none">#define TIMER_PWM_EN                    1           &#x2F;&#x2F;TIMER的PWM区别于LPWM</code></pre><p>在bsp_sys_init函数下调用初始化函数</p><pre class="language-none"><code class="language-none">#if PWM_RGB_EN    pwm_init();#endif &#x2F;&#x2F; PWM_RGB_EN    pwm_port_init();    &#x2F;&#x2F;&#x2F; enable user timer for display &amp; dac    sys_set_tmr_enable(1, 1);</code></pre><h4 id="编写扫描函数"><a href="#编写扫描函数" class="headerlink" title="编写扫描函数"></a>编写扫描函数</h4><pre class="language-none"><code class="language-none">AT(.com_text.rgb)void rgb_breath_scan(void)      &#x2F;&#x2F; 5ms  放5ms中断&#123;    static u8 cnt &#x3D; 0;    static u8 dir &#x3D; 0;    static u16 cduty &#x3D; 0;    cnt++;    if(cnt&gt;&#x3D;20)&#123;        if(dir&#x3D;&#x3D;0)&#123;        if(cduty&lt;999)&#123;            cduty &#x3D; cduty + 9;        &#125;else&#123;            dir &#x3D; 1;            cduty &#x3D; 999;        &#125;        &#125;else&#123;            if(cduty&gt;9)            &#123;                 cduty &#x3D; cduty - 9;            &#125;else&#123;                dir &#x3D; 0;                cduty &#x3D; 0;            &#125;        &#125;        cnt &#x3D; 0;    &#125;        TMR3DUTY1 &#x3D; cduty;&#125;</code></pre><h3 id="调用扫描函数"><a href="#调用扫描函数" class="headerlink" title="调用扫描函数"></a>调用扫描函数</h3><p>在usr_tmr5ms_isr下调用，增加的标志位为真代表播放状态，否则是暂停状态</p><pre class="language-none"><code class="language-none">if(RGB_LED_flag)&#123;        rgb_breath_scan();   &#125;else&#123;    TMR3DUTY1&#x3D;999;   &#125;</code></pre>]]></content>
     
