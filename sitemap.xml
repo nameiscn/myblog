@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nameiscn.github.io/myblog/2022/07/26/04%20532X_PWM/</loc>
+    
+    <lastmod>2022-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nameiscn.github.io/myblog/2022/07/24/03%20software/</loc>
     
     <lastmod>2022-07-24</lastmod>
@@ -103,7 +112,7 @@
 
   <url>
     <loc>https://nameiscn.github.io/myblog</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -111,70 +120,84 @@
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/CBT/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/%E8%80%B3%E6%9C%BA/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/TWS/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/532X/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/codeblocks/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/RV32-Toolchain-Setup/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/PWM/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/Python/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/Windows/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/tags/Anaconda/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nameiscn.github.io/myblog/tags/pwm/</loc>
+    <lastmod>2022-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nameiscn.github.io/myblog/tags/532x/</loc>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -183,14 +206,14 @@
   
   <url>
     <loc>https://nameiscn.github.io/myblog/categories/%E8%93%9D%E8%AE%AF%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nameiscn.github.io/myblog/categories/Python/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
